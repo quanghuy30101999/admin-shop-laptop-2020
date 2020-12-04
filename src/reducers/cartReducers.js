@@ -1,12 +1,30 @@
 var initialState = [];
 
+var findIndex = (product, id) => {
+    var result = -1;
+    product.forEach((element, index) => {
+        if(element.id === id){
+            result = index
+        }
+    });
+    return result;
+}
+
 const cart = (state = initialState, action) => {
-    console.log(action);
+    var index = -1;
     switch(action.type){
         case 'GET_CART':
             state = action.payload
-            return state
-        default : return state;
+            console.log(state)
+            return [...state]
+        case 'ADD_TO_CART':
+            state.push(action.payload)
+            return [...state]
+        case 'UPDATE_CART':
+            index = findIndex(state, action.id)
+            state[index] = action.payload
+            return [...state]
+        default : return [...state];
     }
 }
 

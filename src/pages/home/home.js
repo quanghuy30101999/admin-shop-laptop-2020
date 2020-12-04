@@ -5,12 +5,14 @@ import './css/listproduct.css'
 import { connect } from 'react-redux'
 import { getProductAPI } from '../../actions/products/product.action'
 import ValidateLogin from './ValidateLogin'
+import { addToCartAPI } from './../../actions/cart/addToCart'
 
 class Home extends Component {
     constructor(){
         super();
         this.state = {
-            redirect: false
+            redirect: false,
+            addToCart: false
         }
     }
    
@@ -18,10 +20,14 @@ class Home extends Component {
         this.props.getProducts();
     }
     
-    addToCart = () => {
+    addToCart = (data) => {
+      return e => {
         let { login } = this.props;
         if(login){
-            
+            this.props.AddToCart(data);
+            this.setState({
+                addToCart: true
+            })
         }
         else
         {
@@ -29,12 +35,16 @@ class Home extends Component {
                 redirect: true
             })
         }
+      } 
          
     }
     render() {
-        let {redirect} = this.state;
+        let {redirect, addToCart} = this.state;
         if(redirect){
             return <Redirect to="/login"/>
+        }
+        if(addToCart){
+            // return <Redirect to="/shoppingCart"/>
         }
         let product = this.props.products.map((product, index) => {
             let img = `https://shop-laptop-2020.herokuapp.com/${product.picture.url}`
@@ -45,7 +55,7 @@ class Home extends Component {
                         <div className="card-block ttsp">
                             <a href="/" className="tdspkhac">{product.name}</a>
                             <b>{product.price}</b>
-                            <div className="btn btn-outline-info btn-block addCart" onClick={this.addToCart}>Thêm vào giỏ hàng</div>
+                            <div className="btn btn-outline-info btn-block addCart" onClick={this.addToCart(product)}>Thêm vào giỏ hàng</div>
                         </div>
                     </div>
                 </div>
@@ -95,7 +105,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    getProducts: () => dispatch(getProductAPI())
+    getProducts: () => dispatch(getProductAPI()),
+    AddToCart: data => dispatch(addToCartAPI(data))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

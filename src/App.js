@@ -8,6 +8,7 @@ import {
 import Home from './pages/home/home'
 import Login from './pages/login/login'
 import DataCart from './pages/home/cart/DataCart'
+import UserOrders from './pages/orders/orders';
 
 class App extends Component {
   render(){
@@ -15,7 +16,10 @@ class App extends Component {
       <Fragment>
         <Router>
           <Route exact path="/" component={Home} />
-          <Route path="/shoppingCart" component={DataCart}/>
+          <Route exact path="/user_orders" component={UserOrders} />
+          <Route path="/shoppingCart">
+              <DataCart/>
+          </Route>
           <Route exact path="/login" component={Login} />
           
           <Route path="/dashboard">
