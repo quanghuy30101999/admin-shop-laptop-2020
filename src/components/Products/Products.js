@@ -1,7 +1,11 @@
 import { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
+import { getProductAPI } from '../../actions/products/product.action'
 
 class Product extends Component {
+  componentDidMount() {
+    this.props.getProducts();
+}
   render(){
     let products = this.props.products.map((product, index) => {
       return(
@@ -67,10 +71,12 @@ class Product extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return{
-    products: state.products
-  }
-}
+const mapStateToProps = state => ({
+  products: state.products
+})
 
-export default connect(mapStateToProps, null)(Product)
+const mapDispatchToProps = dispatch => ({
+  getProducts: () => dispatch(getProductAPI())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Product)

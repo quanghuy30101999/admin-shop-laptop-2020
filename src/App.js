@@ -5,8 +5,9 @@ import {
   BrowserRouter as Router,
   Route
 } from 'react-router-dom';
-import Home from './components/Home/Home'
+import Home from './pages/home/home'
 import Login from './pages/login/login'
+import DataCart from './pages/home/cart/DataCart'
 
 class App extends Component {
   render(){
@@ -14,7 +15,9 @@ class App extends Component {
       <Fragment>
         <Router>
           <Route exact path="/" component={Home} />
+          <Route path="/shoppingCart" component={DataCart}/>
           <Route exact path="/login" component={Login} />
+          
           <Route path="/dashboard">
               <Dashboard component="Dashboard">
               </Dashboard>

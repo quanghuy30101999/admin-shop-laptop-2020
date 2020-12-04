@@ -4,6 +4,8 @@ import orders from './orderReducers';
 import users from './userReducers';
 import products from './productReducers';
 import login from './loginReducers';
+import cart from './cartReducers';
+
 
 
 const appReducers = combineReducers({
@@ -11,7 +13,8 @@ const appReducers = combineReducers({
     orders,
     users,
     products,
-    login
+    login,
+    cart
 });
 
 export default appReducers;

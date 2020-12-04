@@ -8,8 +8,11 @@ import { Redirect } from 'react-router-dom'
 
 class App extends Component {
   render(){
-    let roles = JSON.parse(localStorage.getItem('token')).user.roles
-    roles = roles[roles.length - 1]
+    let roles = localStorage.getItem('token') != null ? JSON.parse(localStorage.getItem('token')).user.roles : ''
+    if(roles !== '')
+    {
+      roles = roles[roles.length - 1]
+    }
     let {login} = this.props;
     if(login && roles === "ADMIN") {
       return <Redirect to="/dashboard" />;

@@ -15,6 +15,13 @@ export const action_login = (payload) => {
     }
 }
 
+export const logout = () => {
+    return {
+        type: 'LOGOUT',
+        payload: false
+    }
+}
+
 
 export const login = (isLogin) => {
     return(dispatch) => {
@@ -24,7 +31,7 @@ export const login = (isLogin) => {
             data: {
                 email: isLogin.email,
                 password: isLogin.pwd
-            },
+            }
           }).then(res=>{
               console.log(res)
                 localStorage.setItem('token', JSON.stringify(res.data))
