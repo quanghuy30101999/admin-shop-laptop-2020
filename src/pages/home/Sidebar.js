@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 import './css/sidebar.css'
+import { connect } from 'react-redux'
+import { findProductFromCate } from '../../actions/products/findProductFromCate'
+import {getCategoriesAPI} from '../../actions/categories/category.action'
 class Sidebar extends Component {
+    find =  (e,id) =>{
+        e.preventDefault();
+        this.props.getProducts(id);
+    }
+    componentDidMount(){
+        this.props.getCate();
+    }
     render() {
         return (
             <div className="sidebar col-sm-3">
@@ -8,10 +18,11 @@ class Sidebar extends Component {
                     <div className="card-header text-center tieude1">DANH MỤC SẢN PHẨM</div>
                     <div className="card-body text-dark">
                     <ul>
-                        <a href className="dmct"><li className="dmct">LAPTOP ASUS</li></a>
-                        <a href className="dmct"><li className="dmct">LAPTOP DELL</li></a>
-                        <a href className="dmct"><li className="dmct">LAPTOP LENOVO</li></a>
-                        <a href className="dmct"><li className="dmct">LAPTOP HP</li></a>
+                        {this.props.categories.map((x,y)=> {
+                            return(
+                                <a href="#" className="dmct" key={y} onClick={(e)=>this.find(e,x.id)}><li className="dmct">{x.name}</li></a>
+                            )
+                        })}
                     </ul>
                     </div>
                 </div>
@@ -33,5 +44,12 @@ class Sidebar extends Component {
         );
     }
 }
+const mapStateToProps = state => ({
+    categories : state.categories
+})
+const mapDispatchToProps = dispatch => ({
+    getProducts: id => dispatch(findProductFromCate(id)),
+    getCate : ()=> dispatch(getCategoriesAPI())
+})
 
-export default Sidebar;
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar)

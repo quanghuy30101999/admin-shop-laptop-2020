@@ -69,6 +69,13 @@ class ListProducts extends Component {
                         <div className="row sanphamkhac">
                             <div className="col-sm-12 ">
                                 <h3 className="tdto">Danh sách sản phẩm</h3>
+                                <div className="btn-group chongiaa mb-2">
+                                <label className="label_input ">Giá :</label>
+                                <select  onChange={(e) =>this.isChange(e)}  className="form-control chongia" name="gia" >
+                                    <option  value="1">Tăng</option>
+                                    <option  value="1">Giảm</option>
+                                </select>
+                                </div>
                             </div>
                             {product}
                         </div>

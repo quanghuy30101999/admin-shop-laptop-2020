@@ -104,3 +104,19 @@ div#noidung {
     margin-top: 30px;
     margin-left: -40px;
 }
+
+.btn-group.chongiaa.mb-2 {
+    font-size: 15px;
+    display: inline;
+    margin-left: 630px;
+    width: 20px;
+}
+
+h3.tdto {
+    display: inline;
+}
+
+select.form-control.chongia {
+    display: inline;
+    width: 9%;
+}

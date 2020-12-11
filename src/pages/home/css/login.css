@@ -26,9 +26,9 @@ span.dangnhap {
     margin: auto;
 }
 
-.btn.btn-block.btn-danger.dn {
-    margin-left: 18px;
-    width: 460px;
+.dn {
+    width: 90%;
+    margin: auto;
 }
 a.quenmk {
     color: blue;

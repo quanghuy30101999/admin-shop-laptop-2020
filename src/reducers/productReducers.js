@@ -5,6 +5,9 @@ const products = (state = initialState, action) => {
         case 'FIND_PRODUCTS':
             state = action.payload.data
             return [...state]
+        case 'FIND_PRODUCTS_CATE':
+            state = action.payload.category.products
+            return [...state]
         case 'SHOW_PRODUCTS':
             state = action.payload.data
             return [...state]
