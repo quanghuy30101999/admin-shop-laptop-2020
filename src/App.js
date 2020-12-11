@@ -43,6 +43,10 @@ class App extends Component {
               <Dashboard component="Orders">
               </Dashboard>
           </Route>
+          <Route exact path="/products/new">
+              <Dashboard component="NewProduct">
+              </Dashboard>
+          </Route>
         </Router>
       </Fragment>
     );
