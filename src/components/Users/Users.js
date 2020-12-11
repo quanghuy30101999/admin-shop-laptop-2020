@@ -1,14 +1,17 @@
 import { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-
+import { getUsersAPI } from '../../actions/users/users.action'
 class Users extends Component {
-  render(){
+  componentDidMount() {
+    this.props.getUsers();
+  }
+  render() {
     let users = this.props.users.map((user, index) => {
-      return(
+      return (
         <tr key={index} >
           <th scope="row">
             <div className="media align-items-center">
-              
+
               {/* <a href="#" className="avatar rounded-circle mr-3">
                 <img alt="Image placeholder" src={`../assets/img/theme/${category.img}`} />
               </a> */}
@@ -27,9 +30,11 @@ class Users extends Component {
             {user.address}
           </td>
           <td className="budget">
+            {console.log(user)}
             {user.roles[user.roles.length - 1]}
           </td>
           <td>
+            <button type="button" class="btn btn-info">Details</button>
             <button type="button" class="btn btn-warning">Edit</button>
             <button type="button" class="btn btn-danger">Delete</button>
           </td>
@@ -40,34 +45,38 @@ class Users extends Component {
       <Fragment>
         {/* Light table */}
         <button type="button" class="btn btn-success">New User</button>
-            
-            <div className="table-responsive">
-              <table className="table align-items-center table-flush">
-                <thead className="thead-light">
-                  <tr>
-                    <th scope="col" className="sort" data-sort="name">Name</th>
-                    <th scope="col" className="sort" data-sort="budget">Email</th>
-                    <th scope="col" className="sort" data-sort="status">Phone</th>
-                    <th scope="col" className="sort" data-sort="status">Address</th>
-                    <th scope="col" className="sort" data-sort="status">Roles</th>
-                    <th scope="col" className="sort" data-sort="status">Action</th>
-                    <th scope="col" />
-                  </tr>
-                </thead>
-                <tbody className="list">
-                    {users}
-                </tbody>
-              </table>
-            </div>
+
+        <div className="table-responsive">
+          <table className="table align-items-center table-flush">
+            <thead className="thead-light">
+              <tr>
+                <th scope="col" className="sort" data-sort="name">Name</th>
+                <th scope="col" className="sort" data-sort="budget">Email</th>
+                <th scope="col" className="sort" data-sort="status">Phone</th>
+                <th scope="col" className="sort" data-sort="status">Address</th>
+                <th scope="col" className="sort" data-sort="status">Roles</th>
+                <th scope="col" className="sort" data-sort="status">Action</th>
+                <th scope="col" />
+              </tr>
+            </thead>
+            <tbody className="list">
+              {users}
+            </tbody>
+          </table>
+        </div>
       </Fragment>
     );
   }
 }
 
 const mapStateToProps = state => {
-  return{
+  return {
     users: state.users
   }
 }
 
-export default connect(mapStateToProps, null)(Users)
+const mapDispatchToProps = dispatch => ({
+  getUsers: () => dispatch(getUsersAPI())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Users)

@@ -1,8 +1,11 @@
 import { Component, Fragment } from 'react'
 import './Categories.css'
 import { connect } from 'react-redux'
-
+import { getCategoriesAPI } from '../../actions/categories/category.action'
 class Category extends Component {
+  componentDidMount() {
+    this.props.getCategories();
+  }
   render(){
     let categories = this.props.categories.map((category, index) => {
       return(
@@ -10,9 +13,6 @@ class Category extends Component {
           <th scope="row">
             <div className="media align-items-center">
               
-              <a href="#" className="avatar rounded-circle mr-3">
-                <img alt="Image placeholder" src={`../assets/img/theme/${category.img}`} />
-              </a>
               <div className="media-body">
                 <span className="name mb-0 text-sm">{category.name}</span>
               </div>
@@ -22,6 +22,7 @@ class Category extends Component {
             {category.description}
           </td>
           <td>
+            <button type="button" class="btn btn-info">Details</button>
             <button type="button" class="btn btn-warning">Edit</button>
             <button type="button" class="btn btn-danger">Delete</button>
           </td>
@@ -59,4 +60,8 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, null)(Category)
+const mapDispatchToProps = dispatch => ({
+  getCategories: () => dispatch(getCategoriesAPI())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Category)

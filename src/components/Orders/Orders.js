@@ -1,14 +1,17 @@
 import { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-
+import { getOrdersAPI } from '../../actions/orders/orders.action'
 class Order extends Component {
-  render(){
+  componentDidMount() {
+    this.props.getOrders();
+  }
+  render() {
     let orders = this.props.orders.map((order, index) => {
-      return(
+      return (
         <tr key={index} >
           <th scope="row">
             <div className="media align-items-center">
-              
+
               {/* <a href="#" className="avatar rounded-circle mr-3">
                 <img alt="Image placeholder" src={`../assets/img/theme/${category.img}`} />
               </a> */}
@@ -33,8 +36,11 @@ class Order extends Component {
             {order.status}
           </td>
           <td>
-            <button type="button" class="btn btn-warning">Edit</button>
-            <button type="button" class="btn btn-danger">Delete</button>
+            <button type="button" class="btn btn-info">Details</button>
+            <button type="button" class="btn btn-warning">Cancel</button>
+            <button type="button" class="btn btn-success">Approve</button>
+            <button type="button" class="btn btn-danger">Deny</button>
+            <button type="button" class="btn btn-primary">Done</button>
           </td>
         </tr>
       )
@@ -42,36 +48,39 @@ class Order extends Component {
     return (
       <Fragment>
         {/* Light table */}
-        <button type="button" class="btn btn-success">New Orders</button>
-            
-            <div className="table-responsive">
-              <table className="table align-items-center table-flush">
-                <thead className="thead-light">
-                  <tr>
-                    <th scope="col" className="sort" data-sort="name">User</th>
-                    <th scope="col" className="sort" data-sort="budget">Subtotal</th>
-                    <th scope="col" className="sort" data-sort="status">Phone</th>
-                    <th scope="col" className="sort" data-sort="status">Address</th>
-                    <th scope="col" className="sort" data-sort="status">Time Order</th>
-                    <th scope="col" className="sort" data-sort="status">Status</th>
-                    <th scope="col" className="sort" data-sort="status">Action</th>
-                    <th scope="col" />
-                  </tr>
-                </thead>
-                <tbody className="list">
-                    {orders}
-                </tbody>
-              </table>
-            </div>
+        <button type="button" class="btn btn-success">New Order</button>
+
+        <div className="table-responsive">
+          <table className="table align-items-center table-flush">
+            <thead className="thead-light">
+              <tr>
+                <th scope="col" className="sort" data-sort="name">User</th>
+                <th scope="col" className="sort" data-sort="budget">Subtotal</th>
+                <th scope="col" className="sort" data-sort="status">Phone</th>
+                <th scope="col" className="sort" data-sort="status">Address</th>
+                <th scope="col" className="sort" data-sort="status">Time Order</th>
+                <th scope="col" className="sort" data-sort="status">Status</th>
+                <th scope="col" className="sort" data-sort="status">Action</th>
+                <th scope="col" />
+              </tr>
+            </thead>
+            <tbody className="list">
+              {orders}
+            </tbody>
+          </table>
+        </div>
       </Fragment>
     );
   }
 }
 
 const mapStateToProps = state => {
-  return{
+  return {
     orders: state.orders
   }
 }
 
-export default connect(mapStateToProps, null)(Order)
+const mapDispatchToProps = dispatch => ({
+  getOrders: () => dispatch(getOrdersAPI())
+})
+export default connect(mapStateToProps, mapDispatchToProps)(Order)

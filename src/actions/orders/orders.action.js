@@ -1,5 +1,31 @@
 import axios from 'axios'
 
+export const getOrders = (status, payload) => {
+  if (status === 200) {
+    return {
+      type: 'GET_ORDERS',
+      payload
+    }
+  }
+}
+
+export const getOrdersAPI = () => {
+  return (dispatch) => {
+    axios({
+      method: 'GET',
+      url: 'https://shop-laptop-2020.herokuapp.com/v1/orders',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': JSON.parse(localStorage.getItem('token'))['token']
+      }
+    }).then(res => {
+      dispatch(getOrders(res.status, res.data));
+    }).then(error => {
+      console.log(error);
+    });
+  }
+}
+
 export const showOrders = () => {
   return {
     type: 'SHOW_ORDERS'
