@@ -13,6 +13,10 @@ var findIndex = (product, id) => {
 const cart = (state = initialState, action) => {
     var index = -1;
     switch(action.type){
+        case 'DELETE_TO_CART':
+            index = findIndex(state, action.idItem)
+            state.splice(index, 1);
+            return [...state]
         case 'GET_CART':
             state = action.payload
             console.log(state)

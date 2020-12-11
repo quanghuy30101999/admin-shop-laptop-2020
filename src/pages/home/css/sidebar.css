@@ -1,0 +1,44 @@
+.sidebar {
+    width: 212px;
+}
+
+label.label_input.tu {
+    width: 65px;
+    margin-left: -10px;
+}
+.text-dark {
+    margin-top: -13px;
+    font-size: 15px;
+    color: #343a40!important;
+    margin-bottom: -24px;
+}
+.sidebar {
+    margin-left: 70px;
+    font-weight: bold;
+    font-family: segoe ui light;
+    width: 212px;
+    margin-top: 30px;
+}
+ul{
+    list-style: none;
+}
+li.dmct {
+    color: #675d5d;
+}
+
+
+a.dmct:hover {
+    color: blue;
+    cursor: pointer;
+}
+
+a.dmct {
+    text-decoration: none;
+}
+
+a.dmct:hover li {
+    color: blue;
+}
+.tieude1{
+    background: #e2dbdb;
+}
