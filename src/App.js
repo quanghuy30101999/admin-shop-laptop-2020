@@ -27,8 +27,12 @@ class App extends Component {
             <Dashboard component="Dashboard">
             </Dashboard>
           </Route>
-          <Route path="/users">
+          <Route exact path="/users">
             <Dashboard component="Users">
+            </Dashboard>
+          </Route>
+          <Route exact path="/users/new" >
+            <Dashboard component="NewUser">
             </Dashboard>
           </Route>
           <Route path="/categories">

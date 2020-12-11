@@ -1,11 +1,28 @@
 import { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
+import NewUser from './NewUser'
+import { Redirect } from 'react-router-dom'
 import { getUsersAPI } from '../../actions/users/users.action'
+
 class Users extends Component {
+  constructor(){
+    super();
+    this.state = {
+      statusAddProduct: false
+    }
+  }
   componentDidMount() {
     this.props.getUsers();
   }
+
+  onClick = () => {
+    this.setState({statusAddProduct: true})
+  }
   render() {
+    let { statusAddProduct}= this.state;
+    if(statusAddProduct){
+      return <Redirect to="/users/new" component={NewUser}/>
+    }
     let users = this.props.users.map((user, index) => {
       return (
         <tr key={index} >
@@ -44,8 +61,7 @@ class Users extends Component {
     return (
       <Fragment>
         {/* Light table */}
-        <button type="button" class="btn btn-success">New User</button>
-
+        <button type="button" class="btn btn-success" onClick={this.onClick}>New User</button>
         <div className="table-responsive">
           <table className="table align-items-center table-flush">
             <thead className="thead-light">

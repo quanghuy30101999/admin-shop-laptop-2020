@@ -8,6 +8,7 @@ import Orders from '../../components/Orders/Orders'
 import Users from '../../components/Users/Users'
 import NewProduct from '../../components/Products/NewProduct'
 import NewCategory from '../../components/Categories/NewCategory'
+import NewUser from '../../components/Users/NewUser'
 
 class App extends Component {
   render() {
@@ -34,8 +35,12 @@ class App extends Component {
       case "NewCategory":
         component = <NewCategory></NewCategory>
         break;
+      case "NewUser":
+        component = <NewUser></NewUser>
+        break;
       default:
         component = <Dashboard></Dashboard>
+        break;
     }
     return (
       <Fragment>

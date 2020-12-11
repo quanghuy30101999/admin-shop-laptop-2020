@@ -25,3 +25,30 @@ export const getUsersAPI = () => {
     });
   }
 }
+
+export const createUserAPI = (data) => {
+  return (dispatch) => {
+    axios({
+      method: 'POST',
+      url: 'https://shop-laptop-2020.herokuapp.com/v1/users',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': JSON.parse(localStorage.getItem('token'))['token']
+      },
+      data: {
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        address: data.address,
+        password: data.password
+      }
+    }).then(res => {
+      dispatch({
+        type: 'CREATE_USER',
+        payload: res.data
+      },alert('Create Success'));
+    }).then(error => {
+      console.log(error);
+    });
+  }
+}
