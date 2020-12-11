@@ -16,7 +16,7 @@ export const getCategoriesAPI = () => {
       url: 'https://shop-laptop-2020.herokuapp.com/v1/categories',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': JSON.parse(localStorage.getItem('token'))['token']
+        'Authorization': localStorage.getItem('token') != null ? JSON.parse(localStorage.getItem('token'))['token'] : ''
       }
     }).then(res => {
       dispatch(getCategories(res.status, res.data));
