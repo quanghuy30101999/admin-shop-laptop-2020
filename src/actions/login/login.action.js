@@ -30,7 +30,7 @@ export const login = (isLogin) => {
             url: 'https://shop-laptop-2020.herokuapp.com/v1/login',
             data: {
                 email: isLogin.email,
-                password: isLogin.pwd
+                password: isLogin.password
             }
           }).then(res=>{
               console.log(res)

@@ -9,6 +9,7 @@ import Home from './pages/home/home'
 import Login from './pages/login/login'
 import DataCart from './pages/home/cart/DataCart'
 import UserOrders from './pages/orders/orders';
+import Register from './pages/Register/Register'
 
 class App extends Component {
   render(){
@@ -21,7 +22,7 @@ class App extends Component {
               <DataCart/>
           </Route>
           <Route exact path="/login" component={Login} />
-          
+          <Route exact path="/register" component={Register} />
           <Route path="/dashboard">
               <Dashboard component="Dashboard">
               </Dashboard>

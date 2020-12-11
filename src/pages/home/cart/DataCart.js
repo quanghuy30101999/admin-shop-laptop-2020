@@ -1,19 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom';
 import { getCart } from '../../../actions/cart/login.action'
 import { updateCartAPI } from '../../../actions/cart/updateCart'
 import UserOrders from '../../../pages/orders/orders'
+import {Link} from 'react-router-dom'
+
 class DataCart extends Component {
 
     constructor(props) {
         super(props);
-        this.cart_id = JSON.parse(localStorage.getItem('token')).user.cart.id;
+        this.cart_id = localStorage.getItem('token') != null ? JSON.parse(localStorage.getItem('token')).user.cart.id : '';
         this.state = {
-          order_item_ids: [],
-          subtotal: 0,
-          user: {},
-          onRedirect: false
+            order_item_ids: [],
+            subtotal: 0,
+            user: {},
+            onRedirect: false
         }
     }
 
@@ -28,11 +29,11 @@ class DataCart extends Component {
 
 
     render() {
-        let {onRedirect} = this.state;
-        if(onRedirect){
-            return <UserOrders orders={this.state}/>
+        let { onRedirect } = this.state;
+        if (onRedirect) {
+            return <UserOrders orders={this.state} />
         }
-        var sum =0;
+        var sum = 0;
         let cart = this.props.cart.map((cart, index) => {
             sum += cart.quantity * cart.unit_price
             return (
@@ -63,39 +64,57 @@ class DataCart extends Component {
         })
 
         return (
-            <div className="container pt-2 card card-block col-sm-10" id="noidunggiohang">
-                <div className="row tieude col-sm-12">
-                    <div>
-                        <a href="/" style={{ color: 'blue' }}> &lt; Mua thêm sản phẩm khác</a>
-                    </div>
-                    <div style={{ marginLeft: '480px' }}>
-                        Giỏ hàng của bạn
-            </div>
-                </div>
-                <hr />
-                <div className="row col-sm-12">
-
-                    <div className="row dssanpham col-sm-8">
-                        <div className="card card-block">
-                            {cart}
+            <Fragment>
+                <div className="header">
+                    <div className="bottom">
+                        <a href="/" className="traii">
+                            <i className="fa fa-home" />
+                            <span>BKLaptop</span>
+                        </a>
+                        <div className="search">
+                            <input type="text" placeholder="Nhập từ khóa cần tìm" className="txtSearch" />
+                            <a href="/"><i className="fa fa-search" /></a>
                         </div>
+                        <Link className="cart" to="/shoppingCart">
+                            <i className="fa fa-shopping-cart"> Giỏ hàng</i>
+                            <span className="soluong">0</span>
+                        </Link>
                     </div>
+                </div>
+                <div className="container pt-2 card card-block col-sm-10" id="noidunggiohang">
+                    <div className="row tieude col-sm-12">
+                        <div>
+                            <a href="/" style={{ color: 'blue' }}> &lt; Mua thêm sản phẩm khác</a>
+                        </div>
+                        <div style={{ marginLeft: '480px' }}>
+                            Giỏ hàng của bạn
+            </div>
+                    </div>
+                    <hr />
+                    <div className="row col-sm-12">
 
-                    <div className="col-sm-4" id="tinhgia">
-                        <div className="divtrang card card-block">
-                            <div className="thanhtien">
-                                <div className="phai float-xs-right">
-                                    <div className="trai">Thành tiền</div>
-                                        <div className="todo">{sum}đ</div>
-                                    <div className="gom">(Đã bao gồm VAT nếu có)</div>
-                                </div>
+                        <div className="row dssanpham col-sm-8">
+                            <div className="card card-block">
+                                {cart}
                             </div>
                         </div>
-                        <div className="btn btn-block btn-danger" onClick={(e) => this.order(e, sum )}>Tiến hành đặt hàng</div>
-                    </div>
-                </div>
 
-            </div>
+                        <div className="col-sm-4" id="tinhgia">
+                            <div className="divtrang card card-block">
+                                <div className="thanhtien">
+                                    <div className="phai float-xs-right">
+                                        <div className="trai">Thành tiền</div>
+                                        <div className="todo">{sum}đ</div>
+                                        <div className="gom">(Đã bao gồm VAT nếu có)</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="btn btn-block btn-danger" onClick={(e) => this.order(e, sum)}>Tiến hành đặt hàng</div>
+                        </div>
+                    </div>
+
+                </div>
+            </Fragment>
         );
     }
 
@@ -108,7 +127,7 @@ class DataCart extends Component {
             onRedirect: true
         })
     }
-    
+
 }
 
 
