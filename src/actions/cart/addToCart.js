@@ -27,6 +27,7 @@ export const addToCartAPI = (data) => {
                 'Authorization': JSON.parse(localStorage.getItem('token'))['token']
             }
           }).then(res=>{
+              console.log(res);
               dispatch(addToCart(res.status, res.data))
           }).then(error => {
               console.log(error);

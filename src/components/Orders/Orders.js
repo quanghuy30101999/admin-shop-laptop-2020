@@ -1,20 +1,32 @@
 import { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { getOrdersAPI } from '../../actions/orders/orders.action'
+
 class Order extends Component {
+  constructor(){
+    super();
+    this.state = {
+      statusAddProduct: false
+    }
+  }
   componentDidMount() {
     this.props.getOrders();
   }
+
+  onClick = () => {
+    this.setState({statusAddProduct: true})
+  }
+
   render() {
+    // let { statusAddProduct } = this.state;
+    // if(statusAddProduct){
+    //   return <NewOrders/>
+    // }
     let orders = this.props.orders.map((order, index) => {
       return (
         <tr key={index} >
           <th scope="row">
             <div className="media align-items-center">
-
-              {/* <a href="#" className="avatar rounded-circle mr-3">
-                <img alt="Image placeholder" src={`../assets/img/theme/${category.img}`} />
-              </a> */}
               <div className="media-body">
                 <span className="name mb-0 text-sm">{order.user_name}</span>
               </div>
@@ -48,8 +60,7 @@ class Order extends Component {
     return (
       <Fragment>
         {/* Light table */}
-        <button type="button" class="btn btn-success">New Order</button>
-
+        <button type="button" class="btn btn-success" onClick={this.onClick}>New Order</button>
         <div className="table-responsive">
           <table className="table align-items-center table-flush">
             <thead className="thead-light">

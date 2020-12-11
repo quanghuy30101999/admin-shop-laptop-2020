@@ -2,12 +2,15 @@ var initialState = [
 ];
 
 const categories = (state = initialState, action) => {
-    switch(action.type){
+    console.log(action)
+    switch (action.type) {
         case 'GET_CATEGORIES':
             state = action.payload.data
-            console.log(state)
             return [...state]
-        default : return [...state];
+        case 'CREATE_CATEGORY':
+            state.push(action.payload)
+            return [...state]
+        default: return [...state];
     }
 }
 

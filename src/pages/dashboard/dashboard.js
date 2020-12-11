@@ -6,11 +6,13 @@ import Categories from '../../components/Categories/Categories'
 import Products from '../../components/Products/Products'
 import Orders from '../../components/Orders/Orders'
 import Users from '../../components/Users/Users'
+import NewProduct from '../../components/Products/NewProduct'
+import NewCategory from '../../components/Categories/NewCategory'
 
 class App extends Component {
-  render(){
-    let {component} = this.props;
-    switch(component) {
+  render() {
+    let { component } = this.props;
+    switch (component) {
       case "Dashboard":
         component = <Dashboard></Dashboard>
         break;
@@ -26,24 +28,30 @@ class App extends Component {
       case "Orders":
         component = <Orders></Orders>
         break;
+      case "NewProduct":
+        component = <NewProduct></NewProduct>
+        break;
+      case "NewCategory":
+        component = <NewCategory></NewCategory>
+        break;
       default:
         component = <Dashboard></Dashboard>
-    } 
+    }
     return (
       <Fragment>
         <div>
-        <Sidenav />
-        <div className="main-content" id="panel">
-          <Header />
-          <div>
-            <div className="container-fluid">
-              <div className="header-body">
-                {component}
+          <Sidenav />
+          <div className="main-content" id="panel">
+            <Header />
+            <div>
+              <div className="container-fluid">
+                <div className="header-body">
+                  {component}
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
       </Fragment>
     );
   }

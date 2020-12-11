@@ -1,12 +1,29 @@
 import { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { getProductAPI } from '../../actions/products/product.action'
+import NewProduct from './NewProduct'
+import { Link, Redirect } from 'react-router-dom'
 
 class Product extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      statusAddProduct: false
+    }
+  }
+
+  onClick = () => {
+    this.setState({statusAddProduct: true})
+  }
+
   componentDidMount() {
     this.props.getProducts();
   }
   render() {
+    let { statusAddProduct } = this.state;
+    if(statusAddProduct){
+      return <Redirect to="/product/new" component={NewProduct}/>
+    }
     let products = this.props.products.map((product, index) => {
       return (
         <tr key={index} >
@@ -46,7 +63,7 @@ class Product extends Component {
     })
     return (
       <Fragment>
-        <button type="button" class="btn btn-success">New Product</button>
+        <button type="button" class="btn btn-success" onClick={this.onClick}>New Product</button>
 
         <div className="table-responsive">
           <table className="table align-items-center table-flush">

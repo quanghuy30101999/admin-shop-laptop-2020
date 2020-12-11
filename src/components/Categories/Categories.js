@@ -2,11 +2,26 @@ import { Component, Fragment } from 'react'
 import './Categories.css'
 import { connect } from 'react-redux'
 import { getCategoriesAPI } from '../../actions/categories/category.action'
+import { Link, Redirect } from 'react-router-dom'
+import NewCategory from './NewCategory'
 class Category extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      statusAddProduct: false
+    }
+  }
   componentDidMount() {
     this.props.getCategories();
   }
+  onClick = () => {
+    this.setState({statusAddProduct: true})
+  }
   render(){
+    let { statusAddProduct } = this.state;
+    if(statusAddProduct){
+      return <Redirect to="/category/new" component={NewCategory}/>
+    }
     let categories = this.props.categories.map((category, index) => {
       return(
         <tr key={index} >
@@ -32,7 +47,7 @@ class Category extends Component {
     return (
       <Fragment>
             {/* Light table */}
-            <button type="button" class="btn btn-success">New Category</button>
+            <button type="button" class="btn btn-success" onClick={this.onClick}>New Category</button>
             
             <div className="table-responsive">
               <table className="table align-items-center table-flush">
