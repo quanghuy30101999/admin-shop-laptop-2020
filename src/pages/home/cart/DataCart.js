@@ -4,6 +4,8 @@ import { getCart } from '../../../actions/cart/login.action'
 import { updateCartAPI } from '../../../actions/cart/updateCart'
 import UserOrders from '../../../pages/orders/orders'
 import {Link} from 'react-router-dom'
+import Header from '../Header';
+import { deleteCartAPI } from '../../../actions/cart/deleteCart';
 
 class DataCart extends Component {
 
@@ -25,7 +27,9 @@ class DataCart extends Component {
     setTien = (id, e) => {
         this.props.updateCartAPI(id, e.target.value)
     }
-
+    deleteCart= (id)=>{
+        this.props.deleteCartAPI(id);
+    }
 
 
     render() {
@@ -36,12 +40,13 @@ class DataCart extends Component {
         var sum = 0;
         let cart = this.props.cart.map((cart, index) => {
             sum += cart.quantity * cart.unit_price
+
             return (
                 <div className="row motsanpham">
                     <div className="col-sm-3">
-                        <img src="images/1.jpg" alt="" className="img-fluid myimage" />
+                        <img src="" alt="" className="img-fluid myimage" />
                         <div className="btn-group pt-2">
-                            <div className="btn btn-outline-danger xoasp" style={{ marginLeft: '40px' }}>Delete</div>
+                            <div className="btn btn-outline-danger xoasp" onClick={()=>this.deleteCart(cart.id)} style={{ marginLeft: '40px' }}>Delete</div>
                         </div>
                     </div>
                     <div className="col-sm-4">
@@ -65,22 +70,7 @@ class DataCart extends Component {
 
         return (
             <Fragment>
-                <div className="header">
-                    <div className="bottom">
-                        <a href="/" className="traii">
-                            <i className="fa fa-home" />
-                            <span>BKLaptop</span>
-                        </a>
-                        <div className="search">
-                            <input type="text" placeholder="Nhập từ khóa cần tìm" className="txtSearch" />
-                            <a href="/"><i className="fa fa-search" /></a>
-                        </div>
-                        <Link className="cart" to="/shoppingCart">
-                            <i className="fa fa-shopping-cart"> Giỏ hàng</i>
-                            <span className="soluong">0</span>
-                        </Link>
-                    </div>
-                </div>
+                <Header />
                 <div className="container pt-2 card card-block col-sm-10" id="noidunggiohang">
                     <div className="row tieude col-sm-12">
                         <div>
@@ -138,6 +128,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     getCart: cart_id => dispatch(getCart(cart_id)),
     updateCartAPI: (id, price) => dispatch(updateCartAPI(id, price)),
+    deleteCartAPI : (id) =>dispatch(deleteCartAPI(id))
     // createOrderAPI: (result, sum, user) => dispatch(createOrderAPI(result, sum, user))
 })
 

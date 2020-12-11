@@ -47,7 +47,7 @@ class ListProducts extends Component {
             // return <Redirect to="/shoppingCart"/>
         }
         let product = this.props.products.map((product, index) => {
-            let img = `https://shop-laptop-2020.herokuapp.com/${product.picture.url}`
+            let img = `https://shop-laptop-2020.herokuapp.com${product.picture.url}`
             return (
                 <div className="col-sm-4 mb-2 motsp">
                     <div className="card ">
