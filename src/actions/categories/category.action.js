@@ -25,3 +25,29 @@ export const getCategoriesAPI = () => {
     });
   }
 }
+
+
+export const createCategoryAPI = (data) => {
+  return (dispatch) => {
+    axios({
+      method: 'POST',
+      url: 'https://shop-laptop-2020.herokuapp.com/v1/categories',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': JSON.parse(localStorage.getItem('token'))['token']
+      },
+      data: {
+        name: data.name,
+        description: data.description
+      }
+    }).then(res => {
+      console.log(res);
+      dispatch({
+        type: 'CREATE_CATEGORY',
+        payload: res.data
+      },alert('Create Success'));
+    }).then(error => {
+      console.log(error);
+    });
+  }
+}

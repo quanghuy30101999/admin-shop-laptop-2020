@@ -17,12 +17,6 @@ class App extends Component {
     this.setState({ [name]: value });
   };
 
-  // handleSubmit = e => {
-  //   e.preventDefault();
-  //   this.props.login(this.state);
-  //   this.setState({ email: "", pwd: "" });
-  // };
-
   login(){
     this.props.login(this.state);
     this.setState({ email: "", password: "" });

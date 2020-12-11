@@ -8,6 +8,9 @@ const categories = (state = initialState, action) => {
         case 'GET_USERS':
             state = action.payload.data
             return [...state]
+        case 'CREATE_USER':
+            state.push(action.payload)
+            return [...state]
         default: return [...state];
     }
 }

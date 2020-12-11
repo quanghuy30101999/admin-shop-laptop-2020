@@ -11,7 +11,10 @@ const products = (state = initialState, action) => {
         case 'SHOW_PRODUCTS':
             state = action.payload.data
             return [...state]
-        default : return [...state];
+        case 'CREATE_PRODUCTS':
+            state.push(action.payload)
+            return [...state]
+        default: return [...state];
     }
 }
 
