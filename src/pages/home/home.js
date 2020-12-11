@@ -5,7 +5,6 @@ import './css/listproduct.css'
 import ListProducts from './ListProducts'
 
 import Header from './Header'
-import Body from './Body'
 import Footer from './Footer'
 
 
@@ -18,7 +17,7 @@ class Home extends Component {
                 {/* End Header */}
                 {/* body */}
                     
-                 <Body />
+                 <ListProducts />
                 {/* End body */}
                 <Footer />
             </Fragment>

@@ -31,7 +31,7 @@ class Header extends Component {
                 </div>
                 <Link className="cart" to="/shoppingCart">
                     <i className="fa fa-shopping-cart"> Giỏ hàng</i>
-                    <span className="soluong">{this.props.cart.length }</span>
+                    <span className="soluong">{localStorage.getItem('token') != null ? this.props.cart.length : 0 }</span>
                 </Link>
             </div>
         </div>

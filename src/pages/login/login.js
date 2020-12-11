@@ -51,7 +51,7 @@ class App extends Component {
                   <input onChange={(e) => this.isChange(e)} type="text" className="form-control mb-4" name="email" placeholder="Email/Số điện thoại/Tên đăng nhập" />
                   <input onChange={(e) => this.isChange(e)} type="password" className="form-control " name="password" placeholder="Mật khẩu" />
                 </div>
-                <div className="btn btn-block btn-danger dn mb-2" onClick={() => this.login()}>Đăng Nhập</div>
+                <div className="btn btn-block btn-danger dk mb-2" onClick={() => this.login()}>Đăng Nhập</div>
                 <a href="/" className="quenmk">Quên mật khẩu</a>
                 <span className="ffff mb-2">------------- HOẶC --------------</span>
                 <div className="dktk mb-4">Bạn chưa có tài khoản ?<Link to="/register" className="dndn">Đăng Ký</Link></div>

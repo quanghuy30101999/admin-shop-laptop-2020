@@ -30,11 +30,11 @@ class Sidebar extends Component {
                     <div className="card-header text-center tieude1">LỌC TÌM SẢN PHẨM</div>
                     <div className="card-body text-dark">
                     <div className="btn-group mb-4">
-                        <label className="label_input tu" htmlfor>Từ :</label>
+                        <label className="label_input tu" onChange={(e) =>this.isChange(e)}>Từ :</label>
                         <input type="text" className="form-control locloc" name="name" />
                     </div>
                     <div className="btn-group mb-4">
-                        <label className="label_input tu" htmlfor>Đến :</label>
+                        <label className="label_input tu" >Đến :</label>
                         <input type="text" className="form-control locloc" name="name" />
                     </div>
                     </div>
