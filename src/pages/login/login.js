@@ -1,37 +1,69 @@
 import { Component, Fragment } from 'react'
-import Navbar from './../../components/Login/Navbar/Navbar'
-import Header from '../../components/Login/Header/Header'
-import Form from '../../components/Login/Form/Form'
-import Footer from '../../components/Login/Footer/Footer'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
-
+import { Redirect, Link } from 'react-router-dom'
+import { login } from '../../actions/login/login.action'
 class App extends Component {
-  render(){
+
+  constructor(){
+    super();
+    this.state = {
+      email: "",
+      password: ""
+    }
+  }
+
+  isChange = e => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  };
+
+  // handleSubmit = e => {
+  //   e.preventDefault();
+  //   this.props.login(this.state);
+  //   this.setState({ email: "", pwd: "" });
+  // };
+
+  login(){
+    this.props.login(this.state);
+    this.setState({ email: "", password: "" });
+  }
+  render() {
     let roles = localStorage.getItem('token') != null ? JSON.parse(localStorage.getItem('token')).user.roles : ''
-    if(roles !== '')
-    {
+    if (roles !== '') {
       roles = roles[roles.length - 1]
     }
-    let {login} = this.props;
-    if(login && roles === "ADMIN") {
+    let { login } = this.props;
+    if (login && roles === "ADMIN") {
       return <Redirect to="/dashboard" />;
     }
-    else if(login && roles === "USER") {
+    else if (login && roles === "USER") {
       return <Redirect to="/" />;
     }
     return (
       <Fragment>
-        <div class="bg-default">
-        <div>
-            <Navbar />
-        {/* Main content */}
-        <div className="main-content">
-            <Header />
-            <Form />
-        </div>
-            <Footer/>
-        </div>
+        <div className="wrapper">
+          <div className="upup">
+            <a href="/" className="trai">
+              <i className="fa fa-home" />
+              <span>BKLaptop</span>
+            </a>
+            <span className="dangnhap">Đăng Nhập</span>
+          </div>
+          <div className="backgr">
+            <div className="formdn">
+              <div className="card border-primary ">
+                <div className="card-header text-center">Đăng Nhập</div>
+                <div className="card-body ">
+                  <input onChange={(e) => this.isChange(e)} type="text" className="form-control mb-4" name="email" placeholder="Email/Số điện thoại/Tên đăng nhập" />
+                  <input onChange={(e) => this.isChange(e)} type="password" className="form-control " name="password" placeholder="Mật khẩu" />
+                </div>
+                <div className="btn btn-block btn-danger dn mb-2" onClick={() => this.login()}>Đăng Nhập</div>
+                <a href="/" className="quenmk">Quên mật khẩu</a>
+                <span className="ffff mb-2">------------- HOẶC --------------</span>
+                <div className="dktk mb-4">Bạn chưa có tài khoản ?<Link to="/register" className="dndn">Đăng Ký</Link></div>
+              </div>
+            </div>
+          </div>
         </div>
       </Fragment>
     );
@@ -40,4 +72,10 @@ class App extends Component {
 const mapStateToProps = state => ({
   login: state.login
 })
-export default connect(mapStateToProps, null)(App)
+
+
+const mapDispatchToProps = dispatch => ({
+  login: isLogin => dispatch(login(isLogin))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

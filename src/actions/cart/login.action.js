@@ -23,7 +23,7 @@ export const getCart = (cart_id) => {
             url: `https://shop-laptop-2020.herokuapp.com/v1/users/${cart_id}/cart`,
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': JSON.parse(localStorage.getItem('token'))['token']
+                'Authorization': localStorage.getItem('token') != null ? JSON.parse(localStorage.getItem('token'))['token'] : ''
             }
           }).then(res=>{
             dispatch(action_get_cart(res.status,res.data.cart.order_items));
