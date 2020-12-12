@@ -120,3 +120,12 @@ select.form-control.chongia {
     display: inline;
     width: 9%;
 }
+label.label_input.lbtt {
+    margin-right: 16px;
+    width: 68px;
+    line-height: 38px;
+}
+.btn.btn-danger.cn {
+    width: 65%;
+    margin-left: 107px;
+}

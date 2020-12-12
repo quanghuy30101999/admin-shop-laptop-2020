@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { createOrderAPI } from '../../actions/orders/orders.action'
-
+import Header from '../home/Header';
+import Footer from '../home/Footer';
 class Orders extends Component {
     constructor(props) {
         super()
@@ -54,6 +55,8 @@ class Orders extends Component {
         
 
         return (
+           <div>
+                <Header />
             <div className="container pt-2 card card-block col-sm-10" id="noidunggiohang">
                 <div className="row tieude col-sm-12">
                     <div>
@@ -66,22 +69,42 @@ class Orders extends Component {
                 <hr />
                 <div className="row col-sm-12">
 
-                    <div className="row dssanpham col-sm-12">
-                        {order}
-                        <h1 className="trai">Tổng thanh toán:     {this.props.orders.subtotal}VND</h1>
-                    </div>
-                    <div className="row dssanpham col-sm-12">
-                        <form>
-                            <label htmlFor="fname">Name:</label><br />
-                            <input type="text" id="fname" name="user_name" value={this.state.user_name} onChange={this.handleChange} /><br />
-                            <label htmlFor="lname">Phone:</label><br />
-                            <input type="text" id="lname" name="phone" value={this.state.phone} onChange={this.handleChange}/>
-                            <label htmlFor="lname">Adress:</label><br />
-                            <input type="text" id="lname" name="address" value={this.state.address} onChange={this.handleChange}/><br />
-                        </form>
-                        <div className="btn btn-block btn-danger" onClick={this.order}>Mua hàng</div>
-                    </div>
+                        <div className="row dssanpham col-sm-8">
+                            <div className="card card-block">
+                                {order}
+                            </div>
+                        </div>
+
+                        <div className="col-sm-4" id="tinhgia">
+                            <div className="divtrang card card-block">
+                                <div className="thanhtien">
+                                    <div className="phai float-xs-right">
+                                        <div className="trai">Thành tiền</div>
+                                        <div className="todo">{this.props.orders.subtotal}đ</div>
+                                        <div className="gom">(Đã bao gồm VAT nếu có)</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="btn-group mb-2">
+                                <label className="label_input lbtt" htmlFor="" >Name :</label>
+                                <input type="text"
+                                className="form-control " onChange={this.handleChange} value={this.state.user_name} name="user_name"   placeholder="Nhập tên" />
+                            </div>
+                            <div className="btn-group mb-2">
+                                <label className="label_input lbtt" htmlFor="" >Phone :</label>
+                                <input type="text"
+                                className="form-control  " onChange={this.handleChange} value={this.state.phone} name="phone"   placeholder="Nhập tên" />
+                            </div>
+                            <div className="btn-group mb-2">
+                                <label className="label_input lbtt" htmlFor="" >Address :</label>
+                                <input type="text"
+                                className="form-control " value={this.state.address} onChange={this.handleChange} name="address"   placeholder="Nhập tên" />
+                            </div>
+                            <div className="btn btn-block btn-danger" onClick={this.order}>Mua hàng</div>
+                        </div>
                 </div>
+            </div>
+            <Footer />
             </div>
         );
     }

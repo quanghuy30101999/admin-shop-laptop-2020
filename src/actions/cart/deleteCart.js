@@ -14,7 +14,7 @@ export const deleteCartAPI = (idItem) => {
                 type: 'DELETE_TO_CART',
                 idItem
               })
-              console.log(res.data);
+              alert('Xóa khỏi giỏ hàng thành công')
           }).then(error => {
               console.log(error);
         });

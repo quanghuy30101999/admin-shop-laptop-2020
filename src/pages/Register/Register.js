@@ -23,6 +23,7 @@ class Register extends Component {
             url: 'https://shop-laptop-2020.herokuapp.com/v1/users',
             data: this.state
         }).then(res => {
+            alert('Đăng ký thành công')
             this.setState({
                 isRed: true
             })

@@ -28,6 +28,7 @@ export const addToCartAPI = (data) => {
             }
           }).then(res=>{
               dispatch(addToCart(res.status, res.data))
+              alert('Thêm vào giỏ hàng thành công')
           }).then(error => {
               console.log(error);
         });

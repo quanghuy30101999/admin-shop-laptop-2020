@@ -5,6 +5,7 @@ import { updateCartAPI } from '../../../actions/cart/updateCart'
 import UserOrders from '../../../pages/orders/orders'
 import {Link} from 'react-router-dom'
 import Header from '../Header';
+import Footer from '../Footer';
 import { deleteCartAPI } from '../../../actions/cart/deleteCart';
 
 class DataCart extends Component {
@@ -16,7 +17,8 @@ class DataCart extends Component {
             order_item_ids: [],
             subtotal: 0,
             user: {},
-            onRedirect: false
+            onRedirect: false,
+            ok : false
         }
     }
 
@@ -29,6 +31,9 @@ class DataCart extends Component {
     }
     deleteCart= (id)=>{
         this.props.deleteCartAPI(id);
+        this.setState({
+            ok : true
+        })
     }
 
 
@@ -39,13 +44,13 @@ class DataCart extends Component {
         }
         var sum = 0;
         let cart = this.props.cart.map((cart, index) => {
+
             sum += cart.quantity * cart.unit_price
-            console.log(cart);
             // let img = `https://shop-laptop-2020.herokuapp.com${cart.picture.url}`
             return (
                 <div className="row motsanpham">
                     <div className="col-sm-3">
-                        <img src alt="" className="img-fluid myimage" />
+                        <img src="images/1.jpg" alt="" className="img-fluid myimage" />
                         <div className="btn-group pt-2">
                             <div className="btn btn-outline-danger xoasp" onClick={()=>this.deleteCart(cart.id)} style={{ marginLeft: '40px' }}>Delete</div>
                         </div>
@@ -79,7 +84,7 @@ class DataCart extends Component {
                         </div>
                         <div style={{ marginLeft: '480px' }}>
                             Giỏ hàng của bạn
-            </div>
+                        </div>
                     </div>
                     <hr />
                     <div className="row col-sm-12">
@@ -105,6 +110,7 @@ class DataCart extends Component {
                     </div>
 
                 </div>
+                <Footer />
             </Fragment>
         );
     }
