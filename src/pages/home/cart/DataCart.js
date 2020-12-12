@@ -40,11 +40,12 @@ class DataCart extends Component {
         var sum = 0;
         let cart = this.props.cart.map((cart, index) => {
             sum += cart.quantity * cart.unit_price
-
+            console.log(cart);
+            // let img = `https://shop-laptop-2020.herokuapp.com${cart.picture.url}`
             return (
                 <div className="row motsanpham">
                     <div className="col-sm-3">
-                        <img src="" alt="" className="img-fluid myimage" />
+                        <img src alt="" className="img-fluid myimage" />
                         <div className="btn-group pt-2">
                             <div className="btn btn-outline-danger xoasp" onClick={()=>this.deleteCart(cart.id)} style={{ marginLeft: '40px' }}>Delete</div>
                         </div>

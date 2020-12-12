@@ -7,7 +7,7 @@ import "./detailProduct.css"
 import { BiEdit } from 'react-icons/bi';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { BiDetail } from 'react-icons/bi';
-import axios from 'axios'
+import {updateProductAPI} from '../../actions/products/product.action'
 class Product extends Component {
     constructor() {
         super();
@@ -23,7 +23,7 @@ class Product extends Component {
             ram: '',
             checkDetail: [],
             list: [],
-            checkEdit: []
+            checkEdit: [],
         }
     }
     componentDidMount() {
@@ -58,24 +58,23 @@ class Product extends Component {
     // end details product
 
     // Begin Edit Product
-    editProduct(x) {
-        // const arrCheck = [];
-        // for (var i = 0; i < x; i++) {
-        //     arrCheck[i] = "false";
-        // }
-        // arrCheck[x] = "true";
-        // console.log(x)
-        // console.log(this.state)
-        // this.setState({
-        //     checkEdit: arrCheck,
-        //     id: this.state.list[x].id,
-        //     category: this.state.list[x].category.id,
-        //     name: this.state.list[x].name,
-        //     price: this.state.list[x].price,
-        //     ram: this.state.list[x].ram,
-        //     quantity: this.state.list[x].quantity
-        // })
-        // console.log(this.state.list[x])
+    editProduct = (index) => {
+        const arrCheck = [];
+        for (var i = 0; i < index; i++) {
+            arrCheck[i] = "false";
+        }
+        arrCheck[index] = "true";
+        return (event) => {
+            this.setState({
+                checkEdit: arrCheck,
+                id: this.props.products[index].id,
+                category: this.props.products[index].category.id,
+                name: this.props.products[index].name,
+                price: this.props.products[index].price,
+                ram: this.props.products[index].ram,
+                quantity: this.props.products[index].quantity,
+            })
+        }
     }
     changeCategory(e) {
         return e => {
@@ -105,37 +104,19 @@ class Product extends Component {
             quantity: event.target.value,
         })
     }
-    update(key) {
+    update = (key) => {
         const arrCheck = [];
         for (var i = 0; i < key; i++) {
             arrCheck[i] = "false";
         }
+        
+        this.props.updateProduct(this.state)
+        
         this.setState({
             checkEdit: arrCheck,
             status: true,
-            reload: true
+            reload: true,
         })
-        return (dispatch) => {
-            axios({
-                method: 'PUT',
-                url: `https://shop-laptop-2020.herokuapp.com/v1/products/${this.state.id}`,
-                data: {
-                    category_id: this.state.category,
-                    name: this.state.name,
-                    price: this.state.price,
-                    quantity: this.state.quantity,
-                    ram: this.state.ram
-                },
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': JSON.parse(localStorage.getItem('token'))['token']
-                }
-            }).then(response => {
-                console.log(response.data);
-            }).then(error => {
-                console.log(error);
-            });
-        };
     }
     close(key) {
         const arrCheck = [];
@@ -217,29 +198,32 @@ class Product extends Component {
                         {/* END DETAILS PRODUCT */}
 
                         {/* BEGIN EDIT PRODUCT */}
-                        {(this.state.checkEdit[index] === "true") &&
-                            <div class="form-edit">
-                                <ul class="edit">
-                                    <div><h1>Chỉnh sửa</h1></div>
-                                    <li>
-                                        <p>Dòng Máy</p>
-                                        <select value={this.state.category} onChange={this.changeCategory()} >
-                                            {/* <option value="3"> Macbook</option>
-                                                    <option value="2">Dell</option>
-                                                    <option value="1">HP</option> */}
-                                            {this.state.listC.map((resC, index) => {
-                                                return <option value={resC.id}>{resC.name}</option>
-                                            })}
-                                        </select>
-                                    </li>
-                                    <li> <label>Name</label><input value={this.state.name} type="edit" onChange={event => this.changeValueEditName(event)}></input></li>
-                                    <li> <label>Price</label><input value={this.state.price} type="edit" onChange={event => this.changeValueEditPrice(event)}></input></li>
-                                    <li> <label>quantity</label><input value={this.state.quantity} type="edit" onChange={event => this.changeValueEditQuantity(event)}></input></li>
-                                    <li> <label>RAM</label><input value={this.state.ram} type="edit" onChange={event => this.changeValueEditRam(event)}></input></li>
-                                    <button class="xac-nhan" onClick={this.update(index)}>Xác nhận</button>
-                                    <button class="huy" onClick={this.close(index)}>Hủy</button>
-                                </ul>
-                            </div>}
+                        {(this.state.checkEdit[index] === "true") && <div class="form-edit">
+                            <h1>EDIT PRODUCT</h1>
+                            <ul class="edit">
+                                <div><h1>Chỉnh sửa</h1></div>
+                                <li>
+                                    <p>Dòng</p>
+                                    <select value={this.state.category} onChange={this.changeCategory()} >
+                                        <option value="3"> Macbook</option>
+                                        <option value="2">Dell</option>
+                                        <option value="1">HP</option>
+                                        {this.state.listC.map((resC, key) => {
+                                            return <option value={resC.id}>{resC.name}</option>
+                                        })}
+                                    </select>
+                                </li>
+                                <li> <label>Name</label><input value={this.state.name} type="edit" onChange={event => this.changeValueEditName(event)}></input></li>
+                                <li> <label>Price</label><input value={this.state.price} type="edit" onChange={event => this.changeValueEditPrice(event)}></input></li>
+                                <li> <label>quantity</label><input value={this.state.quantity} type="edit" onChange={event => this.changeValueEditQuantity(event)}></input></li>
+                                <li> <label>RAM</label><input value={this.state.ram} type="edit" onChange={event => this.changeValueEditRam(event)}></input></li>
+                                {/* <button class="btn btn-success" onClick={this.update(index)}>Xác nhận</button>
+                                <button class="btn btn-danger" onClick={this.close(index)}>Hủy</button> */}
+                                {/* <button onClick={this.update(index)} class="btn btn-success"> Xác nhận </button> */}
+                                <button onClick={() => this.update(index)} class="btn btn-success"> Xác nhận </button>
+                                <button class="btn btn-danger" onClick={this.close(index)}>Hủy</button>
+                            </ul>
+                        </div>}
                         {/* END EDIT PRODUCT */}
                     </td>
                 </tr>
@@ -278,7 +262,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    getProducts: () => dispatch(getProductAPI())
+    getProducts: () => dispatch(getProductAPI()),
+    updateProduct: (data) => dispatch(updateProductAPI(data))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Product)
