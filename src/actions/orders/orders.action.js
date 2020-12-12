@@ -44,7 +44,6 @@ export const createOrder = (status, payload) => {
 
 
 export const createOrderAPI = (result, sum, user_id, user) => {
-  console.log(user);
   return (dispatch) => {
     axios({
       method: 'POST',
@@ -64,6 +63,34 @@ export const createOrderAPI = (result, sum, user_id, user) => {
     }).then(res => {
       console.log(res)
       dispatch(createOrder(res.status, res.data))
+    }).then(error => {
+      console.log(error);
+    }).catch(e => {
+      return e;
+    });
+  }
+}
+
+
+
+export const approveOrder = (payload) => {
+  return {
+    type: 'APPROVED_ORDER',
+    payload
+  }
+}
+
+export const approveOrderAPI = (id) => {
+  return (dispatch) => {
+    axios({
+      method: 'PATCH',
+      url: `https://shop-laptop-2020.herokuapp.com/v1/orders/${id}/approve`,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': JSON.parse(localStorage.getItem('token'))['token']
+      }
+    }).then(res => {
+      dispatch(approveOrder(res.data))
     }).then(error => {
       console.log(error);
     }).catch(e => {

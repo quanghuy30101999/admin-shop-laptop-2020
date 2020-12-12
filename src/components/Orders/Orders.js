@@ -1,12 +1,15 @@
 import { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { getOrdersAPI } from '../../actions/orders/orders.action'
+import { doneOrderAPI } from '../../actions/orders/doneOrder'
+import { approveOrderAPI } from '../../actions/orders/orders.action'
+import { denyOrderAPI } from '../../actions/orders/denyOrder '
 
 class Order extends Component {
   constructor(){
     super();
     this.state = {
-      statusAddProduct: false
+      statusAddProduct: false,
     }
   }
   componentDidMount() {
@@ -17,11 +20,39 @@ class Order extends Component {
     this.setState({statusAddProduct: true})
   }
 
+  onDone = (id) => {
+    this.props.doneOrderAPI(id);
+  }
+
+  onApproved = (id) => {
+    this.props.approveOrderAPI(id);
+  }
+
+  onDeny = (id) => {
+    this.props.denyOrderAPI(id);
+  }
+
+  checkStatus = (id, status) => {
+    if(status === 'pending'){
+      return(
+        <Fragment>
+          <button type="button" class="btn btn-danger" onClick={() => this.onDeny(id)}>Deny</button>
+          <button type="button" class="btn btn-success" onClick={() => this.onApproved(id)}>Approve</button>
+        </Fragment>
+      )
+    }
+    else if(status=== 'shipping'){
+      return <button type="button" class="btn btn-primary" onClick={() => this.onDone(id)}>Done</button>
+    }
+    else {
+      return null
+    }
+  }
+  componentWillReceiveProps(nextProps){
+    console.log(nextProps);
+  }
+
   render() {
-    // let { statusAddProduct } = this.state;
-    // if(statusAddProduct){
-    //   return <NewOrders/>
-    // }
     let orders = this.props.orders.map((order, index) => {
       return (
         <tr key={index} >
@@ -48,11 +79,8 @@ class Order extends Component {
             {order.status}
           </td>
           <td>
-            <button type="button" class="btn btn-info">Details</button>
-            <button type="button" class="btn btn-warning">Cancel</button>
-            <button type="button" class="btn btn-success">Approve</button>
-            <button type="button" class="btn btn-danger">Deny</button>
-            <button type="button" class="btn btn-primary">Done</button>
+            <button type="button" class="btn btn-info">Detail</button>
+            {this.checkStatus(order.id ,order.status)}
           </td>
         </tr>
       )
@@ -92,6 +120,9 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  getOrders: () => dispatch(getOrdersAPI())
+  getOrders: () => dispatch(getOrdersAPI()),
+  doneOrderAPI: (id) => dispatch(doneOrderAPI(id)),
+  approveOrderAPI: (id) => dispatch(approveOrderAPI(id)),
+  denyOrderAPI: (id) => dispatch(denyOrderAPI(id))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(Order)

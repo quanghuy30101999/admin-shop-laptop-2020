@@ -1,7 +1,18 @@
 var initialState = [
 ];
 
+var findIndex = (product, id) => {
+    var result = -1;
+    product.forEach((element, index) => {
+        if (element.id === id) {
+            result = index
+        }
+    });
+    return result;
+}
+
 const orders = (state = initialState, action) => {
+    var index = -1;
     switch (action.type) {
         case 'GET_ORDERS':
             state = action.payload.data
@@ -10,6 +21,18 @@ const orders = (state = initialState, action) => {
             return [...state]
         case 'CREATE_ORDER':
             state.push(action.payload)
+            return [...state]
+        case 'DONE_ORDER':
+            index = findIndex(state, action.payload.id)
+            state[index] = action.payload
+            return [...state]
+        case 'APPROVED_ORDER':
+            index = findIndex(state, action.payload.id)
+            state[index] = action.payload
+            return [...state]
+        case 'DENY_ORDER':
+            index = findIndex(state, action.payload.id)
+            state[index] = action.payload
             return [...state]
         default: return [...state];
     }

@@ -51,9 +51,38 @@ export const createProductAPI = (data) => {
       );
     }).then(error => {
       // console.log(error);
-      
+
     }).catch(res => {
-      
+
+    });
+  }
+}
+
+export const updateProductAPI = (data) => {
+  return (dispatch) => {
+    axios({
+      method: 'PUT',
+      url: `https://shop-laptop-2020.herokuapp.com/v1/products/${data.id}`,
+      data: {
+        category_id: data.category,
+        name: data.name,
+        price: data.price,
+        quantity: data.quantity,
+        ram: data.ram
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': JSON.parse(localStorage.getItem('token'))['token']
+      }
+    }).then(response => {
+      console.log('ok editted')
+      console.log(response.data);
+      dispatch({
+        type: 'UPDATE_PRODUCT',
+        payload: response.data
+      })
+    }).then(error => {
+      console.log(error);
     });
   }
 }
