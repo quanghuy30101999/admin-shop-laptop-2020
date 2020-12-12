@@ -61,7 +61,7 @@ export const createOrderAPI = (result, sum, user_id, user) => {
         'Authorization': JSON.parse(localStorage.getItem('token'))['token']
       }
     }).then(res => {
-      console.log(res)
+      alert('Đặt hàng thành công');
       dispatch(createOrder(res.status, res.data))
     }).then(error => {
       console.log(error);
