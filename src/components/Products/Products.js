@@ -7,7 +7,11 @@ import "./detailProduct.css"
 import { BiEdit } from 'react-icons/bi';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { BiDetail } from 'react-icons/bi';
-import {updateProductAPI} from '../../actions/products/product.action'
+import { updateProductAPI } from '../../actions/products/product.action'
+import NewProduct from './NewProduct'
+import { Redirect } from 'react-router-dom'
+import { deleteProductAPI } from '../../actions/products/deleteProduct.action'
+
 class Product extends Component {
     constructor() {
         super();
@@ -28,6 +32,9 @@ class Product extends Component {
     }
     componentDidMount() {
         this.props.getProducts();
+    }
+    onClick = () => {
+        this.setState({ statusAddProduct: true })
     }
     // begin details product
     detailProduct(x) {
@@ -109,9 +116,9 @@ class Product extends Component {
         for (var i = 0; i < key; i++) {
             arrCheck[i] = "false";
         }
-        
+
         this.props.updateProduct(this.state)
-        
+
         this.setState({
             checkEdit: arrCheck,
             status: true,
@@ -132,32 +139,14 @@ class Product extends Component {
         }
     }
     // End Edit Product
-    delete(id) {
-        // const iteam = {
-        //     "id": this.state.id,
-        //     "name": this.state.name,
-        //     "price": this.state.price,
-        //     "ram": this.state.ram,
-        //     "quantity": this.state.quantity,
-        // }
-        // return (event) => {
-        //     console.log(iteam);
-        //     axios.delete(`https://shop-laptop-2020.herokuapp.com/v1/products/${id}`, {
-
-        //     })
-        //         .then(repos => {
-        //             console.log(iteam);
-        //             window.location.reload()
-
-        //         }).catch(err => {
-        //             console.log("error")
-        //         })
-        //     this.setState({
-        //         status: !this.state.status
-        //     })
-        // }
+    delete = (id) => {
+        this.props.deleteProductAPI(id);
     }
     render() {
+        let { statusAddProduct } = this.state;
+        if (statusAddProduct) {
+            return <Redirect to="/products/new" component={NewProduct} />
+        }
         let products = this.props.products.map((product, index) => {
             return (
                 <tr key={index} >
@@ -187,7 +176,7 @@ class Product extends Component {
                     <td>
                         <button class="btn btn-info" onClick={this.detailProduct(index)}><BiDetail /></button>
                         <button class="btn btn-warning" onClick={this.editProduct(index)}><BiEdit /></button>
-                        <button class="btn btn-danger" onClick={this.delete(product.id)}><RiDeleteBin6Line /></button>
+                        <button class="btn btn-danger" onClick={() => this.delete(product.id)}><RiDeleteBin6Line /></button>
                         {/* BEGIN DETAILS PRODUCT */}
                         {(this.state.checkDetail[index] === "true") && <div class="main-detail-product">
                             <ul class="detail-product">
@@ -217,9 +206,6 @@ class Product extends Component {
                                 <li> <label>Price</label><input value={this.state.price} type="edit" onChange={event => this.changeValueEditPrice(event)}></input></li>
                                 <li> <label>quantity</label><input value={this.state.quantity} type="edit" onChange={event => this.changeValueEditQuantity(event)}></input></li>
                                 <li> <label>RAM</label><input value={this.state.ram} type="edit" onChange={event => this.changeValueEditRam(event)}></input></li>
-                                {/* <button class="btn btn-success" onClick={this.update(index)}>Xác nhận</button>
-                                <button class="btn btn-danger" onClick={this.close(index)}>Hủy</button> */}
-                                {/* <button onClick={this.update(index)} class="btn btn-success"> Xác nhận </button> */}
                                 <button onClick={() => this.update(index)} class="btn btn-success"> Xác nhận </button>
                                 <button class="btn btn-danger" onClick={this.close(index)}>Hủy</button>
                             </ul>
@@ -231,7 +217,7 @@ class Product extends Component {
         })
         return (
             <Fragment>
-                <button type="button" class="btn btn-success" > New Product</button>
+                <button type="button" class="btn btn-success" onClick={this.onClick}> New Product</button>
 
                 <div className="table-responsive">
                     <table className="table align-items-center table-flush">
@@ -263,7 +249,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     getProducts: () => dispatch(getProductAPI()),
-    updateProduct: (data) => dispatch(updateProductAPI(data))
+    updateProduct: (data) => dispatch(updateProductAPI(data)),
+    deleteProductAPI: (id) => dispatch(deleteProductAPI(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Product)

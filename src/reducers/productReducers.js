@@ -29,6 +29,10 @@ const products = (state = initialState, action) => {
             index = findIndex(state, action.payload.id)
             state[index] = action.payload
             return [...state]
+        case 'DELETE_PRODUCTS':
+            index = findIndex(state, action.payload)
+            state.splice(index, 1);
+            return [...state]
         default: return [...state];
     }
 }
