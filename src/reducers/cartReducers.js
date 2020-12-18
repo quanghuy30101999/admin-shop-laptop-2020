@@ -26,7 +26,7 @@ const cart = (state = initialState, action) => {
             return [...state]
         case 'UPDATE_CART':
             index = findIndex(state, action.id)
-            state[index].status = action.payload.status
+            state[index] = action.payload
             return [...state]
         default : return [...state];
     }
