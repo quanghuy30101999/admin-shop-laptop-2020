@@ -12,6 +12,7 @@ var findIndex = (product, id) => {
 }
 
 const orders = (state = initialState, action) => {
+    console.log(state);
     var index = -1;
     switch (action.type) {
         case 'GET_ORDERS':
@@ -31,9 +32,9 @@ const orders = (state = initialState, action) => {
             state[index] = action.payload
             return [...state]
         case 'DENY_ORDER':
-            index = findIndex(state, action.payload.id)
-            state[index] = action.payload
-            return [...state]
+            const newState = { ...state }
+            newState = action.payload
+            return { ...newState }
         default: return [...state];
     }
 }

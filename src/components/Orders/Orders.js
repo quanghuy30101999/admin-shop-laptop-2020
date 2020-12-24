@@ -6,7 +6,7 @@ import { approveOrderAPI } from '../../actions/orders/orders.action'
 import { denyOrderAPI } from '../../actions/orders/denyOrder '
 
 class Order extends Component {
-  constructor(){
+  constructor() {
     super();
     this.state = {
       statusAddProduct: false,
@@ -17,7 +17,7 @@ class Order extends Component {
   }
 
   onClick = () => {
-    this.setState({statusAddProduct: true})
+    this.setState({ statusAddProduct: true })
   }
 
   onDone = (id) => {
@@ -33,26 +33,24 @@ class Order extends Component {
   }
 
   checkStatus = (id, status) => {
-    if(status === 'pending'){
-      return(
+    if (status === 'pending') {
+      return (
         <Fragment>
           <button type="button" class="btn btn-danger" onClick={() => this.onDeny(id)}>Deny</button>
           <button type="button" class="btn btn-success" onClick={() => this.onApproved(id)}>Approve</button>
         </Fragment>
       )
     }
-    else if(status=== 'shipping'){
+    else if (status === 'shipping') {
       return <button type="button" class="btn btn-primary" onClick={() => this.onDone(id)}>Done</button>
     }
     else {
       return null
     }
   }
-  componentWillReceiveProps(nextProps){
-    console.log(nextProps);
-  }
 
   render() {
+    console.log(this.props.orders);
     let orders = this.props.orders.map((order, index) => {
       return (
         <tr key={index} >
@@ -80,7 +78,7 @@ class Order extends Component {
           </td>
           <td>
             <button type="button" class="btn btn-info">Detail</button>
-            {this.checkStatus(order.id ,order.status)}
+            {this.checkStatus(order.id, order.status)}
           </td>
         </tr>
       )
