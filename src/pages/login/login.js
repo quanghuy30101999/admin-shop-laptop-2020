@@ -4,7 +4,7 @@ import { Redirect, Link } from 'react-router-dom'
 import { login } from '../../actions/login/login.action'
 class App extends Component {
 
-  constructor(){
+  constructor() {
     super();
     this.state = {
       email: "",
@@ -17,7 +17,7 @@ class App extends Component {
     this.setState({ [name]: value });
   };
 
-  login(){
+  login() {
     this.props.login(this.state);
     this.setState({ email: "", password: "" });
   }
@@ -28,7 +28,7 @@ class App extends Component {
     }
     let { login } = this.props;
     if (login && roles === "ADMIN") {
-      return <Redirect to="/dashboard" />;
+      return <Redirect to="/Admin" />;
     }
     else if (login && roles === "USER") {
       return <Redirect to="/" />;

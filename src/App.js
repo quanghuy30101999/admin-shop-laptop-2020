@@ -11,7 +11,13 @@ import DataCart from './pages/home/cart/DataCart'
 import UserOrders from './pages/orders/orders';
 import Register from './pages/Register/Register'
 import InfoUser from './pages/home/InfoUser'
-
+import Admin from './pages/admin'
+import Product from './components/Admin/product'
+import Order from './components/Admin/order'
+import Account from './components/Admin/account'
+import Category from './components/Admin/category'
+import HomeAdmin from './components/Admin/homeAdmin'
+import Static from './components/Admin/static'
 class App extends Component {
   render() {
     return (
@@ -29,6 +35,8 @@ class App extends Component {
             <Dashboard component="Dashboard">
             </Dashboard>
           </Route>
+          <Route path='/Admin' component={Admin} />
+
           <Route exact path="/users">
             <Dashboard component="Users">
             </Dashboard>
@@ -58,9 +66,30 @@ class App extends Component {
             </Dashboard>
           </Route>
           <Route exact path="/products/new">
-              <Dashboard component="NewProduct">
-              </Dashboard>
+            <Dashboard component="NewProduct">
+            </Dashboard>
           </Route>
+
+          {/* Begin Admin */}
+          <Route path="/Admin/products">
+            <Product />
+          </Route>
+          <Route path="/Admin/order">
+            <Order />
+          </Route>
+          <Route path="/Admin/account"  >
+            <Account />
+          </Route>
+          <Route path="/Admin/category"  >
+            <Category />
+          </Route>
+          <Route exact path="/Admin">
+            <HomeAdmin />
+          </Route>
+          <Route path="/Admin/static">
+            <Static />
+          </Route>
+          {/* End Admin */}
         </Router>
       </Fragment>
     );
