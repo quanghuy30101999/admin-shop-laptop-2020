@@ -1,0 +1,131 @@
+*{margin: 0; padding: 0;} 
+
+.badge{
+    border-radius: 3px;
+    width: 30px;
+    background-color: rgb(248, 190, 0);
+    color: white;
+}
+.tieude{
+    font-size: 17px;
+    font-weight: bold;
+}
+
+body {
+    font-family: segoe ui light;
+    font-size: 13px;
+    background: #f0f0f0;
+}
+
+h3.tdto {
+    padding: 15px 0px;
+    font-weight: normal;
+}
+
+a.tieude {
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    display: block;
+    text-decoration: none;
+    padding-bottom: 10px;
+}
+
+a.tieude:hover {
+    color: #189eff;
+}
+
+input.soluongsp {
+    margin-top: 4px;
+    padding-left: 25px;
+    line-height: 29px;
+    width: 45%;
+    margin-left: 30px;
+}
+
+.btn-group {
+    font-size: 12px;
+}
+
+.btn.btn-outline-success.capnhapsp, .xoasp {
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.motsanpham{
+    margin-bottom: 20px;
+}
+.gia1 {
+    font-size: 15px;
+    font-weight: bold;
+    padding-right: 0px;
+    display: inline-block;
+}
+.myimage {
+    margin-top: 0px;
+}
+.motsp{
+    font-size: 14px;
+}
+
+.btn-group.pt-2 {
+    margin-top: -10px;
+}
+
+img.img-fluid.myimamge {
+    width: 70%;
+    margin-left: 45px;
+}
+a.tdspkhac {
+    text-decoration: none;
+    color: blue;
+    font-weight: bold;
+    display: block;
+}
+
+.ttsp {
+    text-align: center;
+    padding-bottom: 12px;
+}
+
+.btn.btn-outline-info.btn-block.addCart {
+    width: 80%;
+    margin: auto;
+}
+div#tinhgia {
+    margin-left: 30px;
+    text-align: center;
+}
+
+div#noidunggiohang {
+    margin-top: 30px;
+}
+div#noidung {
+    margin-top: 30px;
+    margin-left: -40px;
+}
+
+.btn-group.chongiaa.mb-2 {
+    font-size: 15px;
+    display: inline;
+    margin-left: 630px;
+    width: 20px;
+}
+
+h3.tdto {
+    display: inline;
+}
+
+select.form-control.chongia {
+    display: inline;
+    width: 9%;
+}
+label.label_input.lbtt {
+    margin-right: 16px;
+    width: 68px;
+    line-height: 38px;
+}
+.btn.btn-danger.cn {
+    width: 65%;
+    margin-left: 107px;
+}

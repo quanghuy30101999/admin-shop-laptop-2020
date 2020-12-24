@@ -1,0 +1,57 @@
+.upup a.trai {
+    margin-right: 20px;
+    color: red;
+    font-size: 35px;
+    margin-left: 70px;
+}
+a.dndn {
+    text-decoration: none;
+    color: blue;
+}
+.wrapper {
+    font-family: segoe ui light;
+}
+
+span.dangnhap {
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 30px;
+}
+
+.upup {
+    padding: 10px 0px;
+}
+.formdn {
+    width: 500px;
+    font-family: segoe ui;
+    margin: auto;
+}
+
+.dn {
+    width: 90%;
+    margin: auto;
+}
+a.quenmk {
+    color: blue;
+    text-decoration: none;
+    margin-left: 18px;
+    font-size: 15px;
+}
+
+span.ffff {
+    color: grey;
+    text-align: center;
+}
+
+.dktk {text-align: center;}
+.card-header.text-center {
+    font-size: 20px;
+}
+.backgr {
+    background-color: #a9a6a6;
+    padding: 50px 0px;
+}
+.btn.btn-block.btn-danger.dn{
+    width: 90%;
+    margin: auto;
+}
