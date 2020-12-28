@@ -71,6 +71,34 @@ export const createOrderAPI = (result, sum, user_id, user) => {
   }
 }
 
+export const historyOrdersByUser = (status, payload) => {
+  if (status === 200) {
+    return {
+      type: 'HISTORY_ORDER_BY_USER',
+      payload
+    }
+  }
+}
+
+export const historyOrdersByUserAPI = (user_id) => {
+  return (dispatch) => {
+    axios({
+      method: 'GET',
+      url: `https://shop-laptop-2020.herokuapp.com/v1/users/${user_id}/history_orders`,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': JSON.parse(localStorage.getItem('token'))['token']
+      }
+    }).then(res => {
+      dispatch(historyOrdersByUser(res.status, res.data))
+    }).then(error => {
+      console.log(error);
+    }).catch(e => {
+      return e;
+    });
+  }
+}
+
 
 
 export const approveOrder = (payload) => {

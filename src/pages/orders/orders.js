@@ -24,8 +24,8 @@ class Orders extends Component {
         })
     }
     render() {
-        if(this.state.order_success){
-            return <Redirect to="/"/>
+        if (this.state.order_success) {
+            return <Redirect to="/" />
         }
         let order = this.props.orders.order_item_ids.map((cart, index) => {
             return (
@@ -52,22 +52,22 @@ class Orders extends Component {
             )
         })
 
-        
+
 
         return (
-           <div>
+            <div>
                 <Header />
-            <div className="container pt-2 card card-block col-sm-10" id="noidunggiohang">
-                <div className="row tieude col-sm-12">
-                    <div>
-                        <a href="/" style={{ color: 'blue' }}> &lt; Mua thêm sản phẩm khác</a>
-                    </div>
-                    <div style={{ marginLeft: '480px' }}>
-                        Đơn hàng của bạn
+                <div className="container pt-2 card card-block col-sm-10" id="noidunggiohang">
+                    <div className="row tieude col-sm-12">
+                        <div>
+                            <a href="/" style={{ color: 'blue' }}> &lt; Mua thêm sản phẩm khác</a>
+                        </div>
+                        <div style={{ marginLeft: '480px' }}>
+                            Đơn hàng của bạn
             </div>
-                </div>
-                <hr />
-                <div className="row col-sm-12">
+                    </div>
+                    <hr />
+                    <div className="row col-sm-12">
 
                         <div className="row dssanpham col-sm-8">
                             <div className="card card-block">
@@ -88,23 +88,23 @@ class Orders extends Component {
                             <div className="btn-group mb-2">
                                 <label className="label_input lbtt" htmlFor="" >Name :</label>
                                 <input type="text"
-                                className="form-control " onChange={this.handleChange} value={this.state.user_name} name="user_name"   placeholder="Nhập tên" />
+                                    className="form-control " onChange={this.handleChange} value={this.state.user_name} name="user_name" placeholder="Nhập tên" />
                             </div>
                             <div className="btn-group mb-2">
                                 <label className="label_input lbtt" htmlFor="" >Phone :</label>
                                 <input type="text"
-                                className="form-control  " onChange={this.handleChange} value={this.state.phone} name="phone"   placeholder="Nhập tên" />
+                                    className="form-control  " onChange={this.handleChange} value={this.state.phone} name="phone" placeholder="Nhập tên" />
                             </div>
                             <div className="btn-group mb-2">
                                 <label className="label_input lbtt" htmlFor="" >Address :</label>
                                 <input type="text"
-                                className="form-control " value={this.state.address} onChange={this.handleChange} name="address"   placeholder="Nhập tên" />
+                                    className="form-control " value={this.state.address} onChange={this.handleChange} name="address" placeholder="Nhập tên" />
                             </div>
                             <div className="btn btn-block btn-danger" onClick={this.order}>Mua hàng</div>
                         </div>
+                    </div>
                 </div>
-            </div>
-            <Footer />
+                <Footer />
             </div>
         );
     }
