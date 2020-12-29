@@ -97,7 +97,6 @@ class InforUser extends Component {
             })
             .catch(error => console.log(error));
           }
-            
         }
         setTrangThai(e){
             e.preventDefault();
