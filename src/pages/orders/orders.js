@@ -4,6 +4,9 @@ import { Redirect } from 'react-router-dom';
 import { createOrderAPI } from '../../actions/orders/orders.action'
 import Header from '../home/Header';
 import Footer from '../home/Footer';
+import PaypalButton from "./PaypalButton";
+import { paypalAPI } from "../../actions/paypal/paypal.action";
+// import axios from 'axios'
 class Orders extends Component {
     constructor(props) {
         super()
@@ -23,9 +26,20 @@ class Orders extends Component {
             [name]: value
         })
     }
+
     render() {
-        if(this.state.order_success){
-            return <Redirect to="/"/>
+        // const token = JSON.parse(localStorage.getItem('token')).token
+        // const user_id = JSON.parse(localStorage.getItem('token')).user.id
+        // const cart = axios.get(`https://shop-laptop-2020.herokuapp.com/v1/users/${user_id}/cart`, {
+        //     headers: { Authorization: token }
+        // }).then(function (response) {
+        //     console.log(response.data);
+        // })
+
+        if (this.state.order_success) {
+            window.setTimeout(() => {
+                window.location.href = '/shoppingCart'
+            }, 2000);
         }
         let order = this.props.orders.order_item_ids.map((cart, index) => {
             return (
@@ -52,22 +66,37 @@ class Orders extends Component {
             )
         })
 
-        
+        const tranSuccess = async (payment) => {
+            console.log(payment);
+            this.props.paypalAPI(payment);
+            let { subtotal } = this.props.orders;
+            let user_id = this.props.orders.user.id;
+            let user = this.state;
+            let result = []
+            this.props.orders.order_item_ids.map((order, index) => {
+                result.push(order.id)
+            })
+            this.props.createOrderAPI(result, subtotal, user_id, user)
+            this.setState({
+                order_success: true
+            })
+            alert("You have successfully placed an order.")
+        }
 
         return (
-           <div>
+            <div>
                 <Header />
-            <div className="container pt-2 card card-block col-sm-10" id="noidunggiohang">
-                <div className="row tieude col-sm-12">
-                    <div>
-                        <a href="/" style={{ color: 'blue' }}> &lt; Mua thêm sản phẩm khác</a>
-                    </div>
-                    <div style={{ marginLeft: '480px' }}>
-                        Đơn hàng của bạn
+                <div className="container pt-2 card card-block col-sm-10" id="noidunggiohang">
+                    <div className="row tieude col-sm-12">
+                        <div>
+                            <a href="/" style={{ color: 'blue' }}> &lt; Mua thêm sản phẩm khác</a>
+                        </div>
+                        <div style={{ marginLeft: '480px' }}>
+                            Đơn hàng của bạn
             </div>
-                </div>
-                <hr />
-                <div className="row col-sm-12">
+                    </div>
+                    <hr />
+                    <div className="row col-sm-12">
 
                         <div className="row dssanpham col-sm-8">
                             <div className="card card-block">
@@ -88,23 +117,26 @@ class Orders extends Component {
                             <div className="btn-group mb-2">
                                 <label className="label_input lbtt" htmlFor="" >Name :</label>
                                 <input type="text"
-                                className="form-control " onChange={this.handleChange} value={this.state.user_name} name="user_name"   placeholder="Nhập tên" />
+                                    className="form-control " onChange={this.handleChange} value={this.state.user_name} name="user_name" placeholder="Nhập tên" />
                             </div>
                             <div className="btn-group mb-2">
                                 <label className="label_input lbtt" htmlFor="" >Phone :</label>
                                 <input type="text"
-                                className="form-control  " onChange={this.handleChange} value={this.state.phone} name="phone"   placeholder="Nhập tên" />
+                                    className="form-control  " onChange={this.handleChange} value={this.state.phone} name="phone" placeholder="Nhập tên" />
                             </div>
                             <div className="btn-group mb-2">
                                 <label className="label_input lbtt" htmlFor="" >Address :</label>
                                 <input type="text"
-                                className="form-control " value={this.state.address} onChange={this.handleChange} name="address"   placeholder="Nhập tên" />
+                                    className="form-control " value={this.state.address} onChange={this.handleChange} name="address" placeholder="Nhập tên" />
                             </div>
                             <div className="btn btn-block btn-danger" onClick={this.order}>Mua hàng</div>
+                            <div className="total">
+                                <PaypalButton tranSuccess={tranSuccess} total={this.props.orders.subtotal / 23000} />
+                            </div>
                         </div>
+                    </div>
                 </div>
-            </div>
-            <Footer />
+                <Footer />
             </div>
         );
     }
@@ -130,7 +162,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    createOrderAPI: (result, subtotal, user_id, user) => dispatch(createOrderAPI(result, subtotal, user_id, user))
+    createOrderAPI: (result, subtotal, user_id, user) => dispatch(createOrderAPI(result, subtotal, user_id, user)),
+    paypalAPI: (payment) => dispatch(paypalAPI(payment))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Orders)

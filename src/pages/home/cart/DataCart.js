@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { getCart } from '../../../actions/cart/login.action'
 import { updateCartAPI } from '../../../actions/cart/updateCart'
 import UserOrders from '../../../pages/orders/orders'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Header from '../Header';
 import Footer from '../Footer';
 import { deleteCartAPI } from '../../../actions/cart/deleteCart';
@@ -18,7 +18,7 @@ class DataCart extends Component {
             subtotal: 0,
             user: {},
             onRedirect: false,
-            ok : false
+            ok: false
         }
     }
 
@@ -29,10 +29,10 @@ class DataCart extends Component {
     setTien = (id, e) => {
         this.props.updateCartAPI(id, e.target.value)
     }
-    deleteCart= (id)=>{
+    deleteCart = (id) => {
         this.props.deleteCartAPI(id);
         this.setState({
-            ok : true
+            ok: true
         })
     }
 
@@ -52,7 +52,7 @@ class DataCart extends Component {
                     <div className="col-sm-3">
                         <img src="images/1.jpg" alt="" className="img-fluid myimage" />
                         <div className="btn-group pt-2">
-                            <div className="btn btn-outline-danger xoasp" onClick={()=>this.deleteCart(cart.id)} style={{ marginLeft: '40px' }}>Delete</div>
+                            <div className="btn btn-outline-danger xoasp" onClick={() => this.deleteCart(cart.id)} style={{ marginLeft: '40px' }}>Delete</div>
                         </div>
                     </div>
                     <div className="col-sm-4">
@@ -74,6 +74,29 @@ class DataCart extends Component {
             )
         })
 
+        let thanhtoan = () => {
+            if (this.props.cart.length > 0) {
+                return (
+                    <div className="col-sm-4" id="tinhgia">
+                        <div className="divtrang card card-block">
+                            <div className="thanhtien">
+                                <div className="phai float-xs-right">
+                                    <div className="trai">Thành tiền</div>
+                                    <div className="todo">{sum}đ</div>
+                                    <div className="gom">(Đã bao gồm VAT nếu có)</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="btn btn-block btn-danger" onClick={(e) => this.order(e, sum)}>Tiến hành đặt hàng</div>
+                    </div>
+                )
+            } else {
+                return (
+                    <h2>Empty</h2>
+                )
+            }
+        }
+
         return (
             <Fragment>
                 <Header />
@@ -94,6 +117,8 @@ class DataCart extends Component {
                                 {cart}
                             </div>
                         </div>
+                        {thanhtoan()}
+                        {/* {this.props.cart.length > 0}
 
                         <div className="col-sm-4" id="tinhgia">
                             <div className="divtrang card card-block">
@@ -107,6 +132,7 @@ class DataCart extends Component {
                             </div>
                             <div className="btn btn-block btn-danger" onClick={(e) => this.order(e, sum)}>Tiến hành đặt hàng</div>
                         </div>
+                        </div> */}
                     </div>
 
                 </div>
@@ -135,7 +161,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     getCart: cart_id => dispatch(getCart(cart_id)),
     updateCartAPI: (id, price) => dispatch(updateCartAPI(id, price)),
-    deleteCartAPI : (id) =>dispatch(deleteCartAPI(id))
+    deleteCartAPI: (id) => dispatch(deleteCartAPI(id))
     // createOrderAPI: (result, sum, user) => dispatch(createOrderAPI(result, sum, user))
 })
 

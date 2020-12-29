@@ -35,6 +35,7 @@ ul.list-title>li,ul.list-info>li{
     opacity: 0.1;
     height: 50px;
     margin-left: -40px;
+
     width: 1060px;
 }
 .shipped{
@@ -77,6 +78,7 @@ ul.form-detail{
     margin-top: 50px;
     list-style: none;
     padding-right: 40px;
+    padding: 0 40px 0 40px;
     background-color: rgba(204, 202, 202, 0.9);
     border-radius: 20px;
     box-shadow: 3px 5px 7px rgba(0, 0, 0);
@@ -89,6 +91,9 @@ div.info-customer,div.info-product-order{
     margin: 50px 0 30px 0;
 }
 
+div.info{
+    padding: 0 0 0 30px;
+}
 ul.info-customer,ul.info-product-order{
     font-family: 'Times New Roman', Times, serif;
     list-style: none; 

@@ -267,8 +267,8 @@ class Category extends Component {
                                             <li>{res.name}</li>
                                             <li>{res.description}</li>
                                             <li>
-                                                <button onClick={this.editCategory(res, key)}>Edit</button>
-                                                <button onClick={this.addProduct(res, key)}>Add</button>
+                                                <button onClick={this.editCategory(res, key)} class="edit-category">Edit</button>
+                                                <button onClick={this.addProduct(res, key)} class="add-category"> Add</button>
                                             </li>
                                         </ul>
 

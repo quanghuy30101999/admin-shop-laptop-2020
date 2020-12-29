@@ -48,8 +48,8 @@ class App extends Component {
               <div className="card border-primary ">
                 <div className="card-header text-center">Đăng Nhập</div>
                 <div className="card-body ">
-                  <input onChange={(e) => this.isChange(e)} type="text" className="form-control mb-4" name="email" placeholder="Email/Số điện thoại/Tên đăng nhập" />
-                  <input onChange={(e) => this.isChange(e)} type="password" className="form-control " name="password" placeholder="Mật khẩu" />
+                  <input onChange={(e) => this.isChange(e)} type="email" className="form-control mb-4" name="email" placeholder="Email/Số điện thoại/Tên đăng nhập" required/>
+                  <input onChange={(e) => this.isChange(e)} type="password" className="form-control " name="password" placeholder="Mật khẩu" required/>
                 </div>
                 <div className="btn btn-block btn-danger dk mb-2" onClick={() => this.login()}>Đăng Nhập</div>
                 <a href="/" className="quenmk">Quên mật khẩu</a>
