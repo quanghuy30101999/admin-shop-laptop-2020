@@ -136,7 +136,6 @@ class Static extends Component {
 
     }
     render() {
-        console.log(this.state.statusValue)
         return (
             <div class="static">
                 <div class="static-user">

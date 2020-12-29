@@ -79,6 +79,7 @@
     align-items: center;
     border-top: 1px solid gray;
     padding-bottom: 20px;
+    padding: 0 10px 20px 10px;
 }
 .form-edit-category>h1{
     font-family: fantasy;
@@ -129,4 +130,23 @@ div.button-tool{
 }
 .form-add-product-category>h1{
     text-align: center;
+}
+button.add{
+    background-color: blue;
+}
+button.edit-category{
+    width: 50px;
+    color: black;
+    background-color: rgb(163, 163, 157);
+    font-family: cursive;
+    font-weight: 800;
+    outline: none;
+}
+button.add-category{
+    width: 50px;
+    color: white;
+    background-color:green;
+    font-family: cursive;
+    font-weight: 800;
+    outline: none;
 }

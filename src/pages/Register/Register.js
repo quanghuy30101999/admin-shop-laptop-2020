@@ -47,11 +47,11 @@ class Register extends Component {
                         <div className="card border-primary ">
                             <div className="card-header text-center">Đăng Ký</div>
                             <div className="card-body ">
-                                <input type="text" onChange={(e) => this.isChange(e)} className="form-control mb-2" name="name" placeholder="Nhập tên" />
-                                <input type="text" onChange={(e) => this.isChange(e)} className="form-control mb-2" name="email" placeholder="Nhập email" />
-                                <input type="text" onChange={(e) => this.isChange(e)} className="form-control mb-2" name="phone" placeholder="Số điện thoại" />
-                                <input type="text" onChange={(e) => this.isChange(e)} className="form-control mb-2" name="address" placeholder="Nhập địa chỉ" />
-                                <input type="password" onChange={(e) => this.isChange(e)} className="form-control " name="password" placeholder="Mật khẩu" />
+                                <input type="text" onChange={(e) => this.isChange(e)} className="form-control mb-2" name="name" placeholder="Nhập tên" required />
+                                <input type="email" onChange={(e) => this.isChange(e)} className="form-control mb-2" name="email" placeholder="Nhập email" required />
+                                <input type="text" onChange={(e) => this.isChange(e)} className="form-control mb-2" name="phone" placeholder="Số điện thoại" required />
+                                <input type="text" onChange={(e) => this.isChange(e)} className="form-control mb-2" name="address" placeholder="Nhập địa chỉ" required />
+                                <input type="password" onChange={(e) => this.isChange(e)} className="form-control " name="password" placeholder="Mật khẩu" required />
                             </div>
                             <div className="btn btn-block btn-danger dk mb-2" onClick={(e) => this.registerUser(e)}>Đăng Ký</div>
                             <span className="ffff mb-2">------------- HOẶC --------------</span>

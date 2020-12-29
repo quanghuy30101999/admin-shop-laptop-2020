@@ -32,6 +32,13 @@ ul.value-name>li {
     text-align: center;
 }
 
+ul.edit{
+    padding: 0 10px 0 10px;
+}
+a.priceSort{
+    color:black;
+    margin: 0 0 0 45px;
+}
 button.Add-product-bnt {
     background-color: rgb(55, 83, 177);
     color: cornsilk;

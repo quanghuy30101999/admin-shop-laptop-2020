@@ -5,22 +5,23 @@ export default class DetailProduct extends React.Component {
     render() {
         const list = [];
         list.push(this.props.res)
-        console.log(list[0].id);
+        console.log(list[0].picture.url);
+        let img = `https://shop-laptop-2020.herokuapp.com/${list[0].picture.url}`
         return (
             <div >
-                <h1>DETAIL</h1>
+                <h1 class="detail-name">DETAIL</h1>
                 <div class="detail-image-product">
-                    <img src="https://cdn.tgdd.vn/Files/2014/11/07/579143/dell-venue-11-pro-2.jpg" ></img>
+                    <img src={img}></img>
                 </div>
                 <div class="form-detail-product">
                     <ul class="form-detail-product">
-                        <li>{list[0].id}</li>
-                        <li>{list[0].name}</li>
-                        <li>{list[0].price}</li>
-                        <li>{list[0].quantity}</li>
-                        <li>{list[0].ram}</li>
-                        <li>{list[0].memory}</li>
-                        <li>{list[0].description}</li>
+                        <li><span>Id:</span>{list[0].id}</li>
+                        <li><span>Name:</span>{list[0].name}</li>
+                        <li><span>Price:</span>{list[0].price}</li>
+                        <li><span>Quantity:</span>{list[0].quantity}</li>
+                        <li><span>Ram:</span>{list[0].ram}</li>
+                        <li><span>Memory:</span>{list[0].memory}</li>
+                        <li><span>Description:</span>{list[0].description}</li>
                     </ul>
                 </div>
             </div>
