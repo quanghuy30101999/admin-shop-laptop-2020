@@ -19,6 +19,8 @@ import Category from './components/Admin/category'
 import HomeAdmin from './components/Admin/homeAdmin'
 import Static from './components/Admin/static'
 import HistoryOrder from './pages/home/HistoryOrder';
+import { connect } from 'react-redux';
+import History from './pages/home/History/history'
 class App extends Component {
   render() {
     return (
@@ -30,6 +32,9 @@ class App extends Component {
           <Route  path="/user_orders" component={UserOrders} />
           <Route path="/shoppingCart">
             <DataCart />
+          </Route>
+          <Route path="/history">
+            {this.props.isLogin ? <History /> : <Login />}
           </Route>
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
@@ -98,4 +103,8 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  isLogin: state.login
+})
+
+export default connect(mapStateToProps, null)(App)

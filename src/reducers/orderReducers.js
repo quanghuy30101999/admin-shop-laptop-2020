@@ -31,6 +31,9 @@ const orders = (state = initialState, action) => {
             index = findIndex(state, action.payload.id)
             state[index] = action.payload
             return [...state]
+        case 'HISTORY_ORDER_BY_USER':
+            state = action.payload.data
+            return [...state]
         case 'DENY_ORDER':
             const newState = { ...state }
             newState = action.payload

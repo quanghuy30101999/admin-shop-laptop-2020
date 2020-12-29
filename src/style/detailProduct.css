@@ -27,3 +27,20 @@
     margin: 50px auto;
 }
 
+.form-detail-product{
+    width: 630px;
+    float: right;
+    margin-top: 25px;
+}
+ul.form-detail-product>li{
+    margin:0 0 5px 20px;
+}
+ul.form-detail-product>li>span{
+    width: 50px;
+    float: left;
+}
+h1.detail-name{
+    display: flex;
+    justify-content: center;
+    font-size: xx-large;
+}

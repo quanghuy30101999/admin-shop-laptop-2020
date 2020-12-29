@@ -5,7 +5,7 @@ class HomeAdmin extends Component {
         return (
             <div>
                 <div class="section">
-                    <h1>WELLCOME BACK</h1>
+                    <h1>WELCOME BACK</h1>
                     <img class="img-background" src="./logo.jpg"></img>
                 </div>
 

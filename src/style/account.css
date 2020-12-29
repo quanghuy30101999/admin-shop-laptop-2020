@@ -37,6 +37,7 @@ p.msg-err{
 div.user-detail{
     width: 600px;
     float: left;
+    margin: 0 10px 5px 45px
 }
 input.disable{
     pointer-events: none;
@@ -85,4 +86,7 @@ button.Add-Account-bnt{
     margin-top: -10px;
     border-radius: 3%;
     outline: none;
+}
+button.Add-Account-bnt{
+    width: 110px;
 }

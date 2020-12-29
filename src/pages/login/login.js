@@ -17,8 +17,10 @@ class App extends Component {
     this.setState({ [name]: value });
   };
 
-  login() {
+  login(e) {
+    e.preventDefault();
     this.props.login(this.state);
+    
     this.setState({ email: "", password: "" });
   }
   render() {
@@ -48,10 +50,10 @@ class App extends Component {
               <div className="card border-primary ">
                 <div className="card-header text-center">Đăng Nhập</div>
                 <div className="card-body ">
-                  <input onChange={(e) => this.isChange(e)} type="text" className="form-control mb-4" name="email" placeholder="Email/Số điện thoại/Tên đăng nhập" />
-                  <input onChange={(e) => this.isChange(e)} type="password" className="form-control " name="password" placeholder="Mật khẩu" />
+                  <input onChange={(e) => this.isChange(e)} type="email" className="form-control mb-4" name="email" placeholder="Email/Số điện thoại/Tên đăng nhập" required/>
+                  <input onChange={(e) => this.isChange(e)} type="password" className="form-control " name="password" placeholder="Mật khẩu" required/>
                 </div>
-                <div className="btn btn-block btn-danger dk mb-2" onClick={() => this.login()}>Đăng Nhập</div>
+                <input type="submit" value="Đăng nhập" className="btn btn-block btn-danger dk mb-2" onClick={(e) => this.login(e)} />
                 <a href="/" className="quenmk">Quên mật khẩu</a>
                 <span className="ffff mb-2">------------- HOẶC --------------</span>
                 <div className="dktk mb-4">Bạn chưa có tài khoản ?<Link to="/register" className="dndn">Đăng Ký</Link></div>

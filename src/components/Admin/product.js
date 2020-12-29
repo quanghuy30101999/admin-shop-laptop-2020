@@ -390,7 +390,7 @@ export default class Product extends React.Component {
                     <ul class="value-name">
                         <li>Dòng sản phẩm</li>
                         <li>Tên sản phẩm</li>
-                        <li onClick={this.sortPrice.bind(this)}> <a href="#"> Giá {this.state.namePrice} </a></li>
+                        <li onClick={this.sortPrice.bind(this)}> <a class="priceSort" href="#"> Giá {this.state.namePrice} </a></li>
                         <li>Số lượng</li>
                         <li>Ram (gb)</li>
                         <li><button class="Add-product-bnt" onClick={this.addProduct()}>Thêm mới</button></li>
