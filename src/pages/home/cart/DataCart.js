@@ -92,7 +92,7 @@ class DataCart extends Component {
                 )
             } else {
                 return (
-                    <h1>Empty</h1>
+                    <h2>Empty</h2>
                 )
             }
         }
