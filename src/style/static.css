@@ -4,6 +4,7 @@
     background-color: beige;
     margin: 50px 110px auto;
     padding: 30px 20px 0 20px;
+    height: auto;
 }
 .static-user-content>img{
     height: 110px;
@@ -23,3 +24,25 @@
 .static-user-content>p>span{
     color: brown;
 }
+
+.static-order{
+    float: left;
+    width: 60%;
+    height:300px;
+}
+.static-product{
+    float: right;
+    width: 40%;
+    height: 400px;
+    
+}
+.view-1{
+    height: 500px;
+    width: 100%;
+}
+h1.sllls{
+    display: flex;
+    text-align: center;
+}
+
+

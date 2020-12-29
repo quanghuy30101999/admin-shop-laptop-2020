@@ -32,4 +32,19 @@ function callAPI(endpoint, method, body, token) {
         console.log(error);
     });
 }
-export default { login, callAPI }
+
+function callPARAM(endpoint, method, body, token, x) {
+    return axios({
+        method: method,
+        url: 'https://shop-laptop-2020.herokuapp.com/v1/' + `${endpoint}`,
+        data: body,
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': token
+        },
+        params: { year: x },
+    }).catch(error => {
+        console.log(error);
+    });
+}
+export default { login, callAPI, callPARAM }
