@@ -14,18 +14,23 @@ class Static extends Component {
             statusValue: '',
             revenue: '',
             data: {},
-            status: false
+            status: false,
+            valueChange: "2020",
+            valuedefault: 2020,
         }
 
     }
     callAPI() {
         var listOrder = []
         let statusName = []
-        let user = ''
+        let user = '';
+        var tmp = {}
         callAPI.callAPI('count_orders', 'GET', listOrder, localStorage.getItem('token')).then((res) => {
+            tmp = res.data.orders
+        }).then((res) => {
             this.setState({
-                statusName: Object.keys(res.data.orders),
-                statusValue: Object.values(res.data.orders),
+                statusName: Object.keys(tmp),
+                statusValue: Object.values(tmp),
             })
         }).then(
             callAPI.callAPI('count_users', 'GET', user, localStorage.getItem('token')).then((res) => {
@@ -57,14 +62,14 @@ class Static extends Component {
                         }
                     })
                 })
-        this.getStaticProduct();
+        this.getStaticProduct(this.state.valuedefault);
     }
-    getStaticProduct() {
+    getStaticProduct(year) {
         var x = [];
         var tmp = [];
         var listProduct = [];
         var listRevenue = [];
-        callAPI.callPARAM('count_revenue', 'GET', x, localStorage.getItem('token'), 2020).then(res => {
+        callAPI.callPARAM('count_revenue', 'GET', x, localStorage.getItem('token'), year).then(res => {
             console.log("static", res.data)
             const x = Object.values(res.data);
             for (var i of x) {
@@ -114,16 +119,11 @@ class Static extends Component {
                     datasets: [
                         {
                             data: listRevenue,
-                            label: "2020",
+                            label: this.state.valueChange,
                             borderColor: "#3e95cd",
                             fill: false
                         },
-                        {
-                            data: [282, 350, 411, 502, 635, 809, 947, 1402, 3700, 5267],
-                            label: "2019",
-                            borderColor: "#8e5ea2",
-                            fill: false
-                        },
+
 
                     ]
                 }
@@ -132,7 +132,17 @@ class Static extends Component {
     }
     componentDidMount() {
         this.callAPI();
+    }
+    changeYEARS() {
 
+        return event => {
+            this.setState({
+                valueChange: event.target.value,
+
+            })
+            console.log(event.target.value)
+            this.getStaticProduct(event.target.value);
+        }
 
     }
     render() {
@@ -141,8 +151,12 @@ class Static extends Component {
             <div class="static">
                 <div class="static-user">
                     <div class='static-user-content'>
-                        <img class="img-background" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFAY9x4-O-NnKHQ96ylko8mzE1JM46QT_EwA&usqp=CAU"></img>
-                        <p> Hiện có <span>{this.state.user}</span>Tài khoản đã đăng kí</p>
+                        <select value={this.state.valueChange} class="cls-2020-2019" onChange={this.changeYEARS()} >
+                            <option value="2020">2020</option>
+                            <option value="2019">2019</option>
+                        </select>
+                        <img class="" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFAY9x4-O-NnKHQ96ylko8mzE1JM46QT_EwA&usqp=CAU"></img>
+                        <p> Hiện có  <span /><span>{this.state.user}</span>Tài khoản đã đăng kí</p>
                     </div>
                 </div>
 
@@ -166,7 +180,7 @@ class Static extends Component {
                             option={{
                                 title: {
                                     display: true,
-                                    text: "Predicted world population (millions) in 2050"
+                                    text: ""
                                 }
                             }}
                         />
@@ -181,7 +195,7 @@ class Static extends Component {
                             options={{
                                 title: {
                                     display: true,
-                                    text: "World population per region (in millions)"
+                                    text: "VND"
                                 },
                                 legend: {
                                     display: true,

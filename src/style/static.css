@@ -9,8 +9,8 @@
 .static-user-content>img{
     height: 110px;
     width: 110px;
-    float: left;
-    margin-left: -50px;
+    margin:0 20px 0 900px;
+    border-radius: 50%;
 }
 .static-user-content{
     display: flex;
@@ -18,7 +18,7 @@
     text-align: center;
 }
 .static-user-content>p{
-    margin-left: 900px;
+    margin: 40px 0 0 0 ;
     font-size: larger;
 }
 .static-user-content>p>span{
@@ -44,5 +44,8 @@ h1.sllls{
     display: flex;
     text-align: center;
 }
-
+.cls-2020-2019{
+    width: 80px;
+    height: 50px;
+}
 
