@@ -21,14 +21,15 @@ import Static from './components/Admin/static'
 import HistoryOrder from './pages/home/HistoryOrder';
 import { connect } from 'react-redux';
 import History from './pages/home/History/history'
+import InforUser from './pages/home/InfoUser';
 class App extends Component {
   render() {
     return (
       <Fragment>
         <Router>
           <Route exact path="/" component={Home} />
-          <Route  path="/infor_user" component={InfoUser} />
           <Route  path="/history_order" component={HistoryOrder} />
+          <Route  path="/infor_user" component={InforUser} />
           <Route  path="/user_orders" component={UserOrders} />
           <Route path="/shoppingCart">
             <DataCart />
