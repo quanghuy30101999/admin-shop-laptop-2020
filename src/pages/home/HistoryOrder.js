@@ -56,7 +56,7 @@ class HistoryOrder extends Component {
                 { this.props.order.map((x,y)=>{
             
                     return (
-                        <div className="row col-sm-12">
+                        <div style={{border: '1px solid #c7c7c7',paddingTop : '10px',marginBottom : '10px',marginLeft : '5px'}} className="row col-sm-12">
                         <div className="row dssanpham col-sm-8">
                         <div className="card card-block">
                             {x.order_items.map((item,index)=>{
