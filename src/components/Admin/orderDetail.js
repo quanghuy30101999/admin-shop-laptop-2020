@@ -127,8 +127,8 @@ export default class ShowDetail extends React.Component {
                                 </div>
                                 {(res.status === "pending") && < div class="btn">
                                     {(this.state.check === false) && <div class="btn">
-                                        <button class="xacnhan-order" onClick={this.accept(res.order_items[0].id)}>Xác nhận đơn hàng ! </button>
-                                        <button class="huy-order" onClick={this.cancel(res.order_items[0].id)}>Hủy đơn hàng !</button>
+                                        <button class="xacnhan-order" onClick={this.accept(res.id)}>Xác nhận đơn hàng ! </button>
+                                        <button class="huy-order" onClick={this.cancel(res.id)}>Hủy đơn hàng !</button>
                                     </div>
                                     }
                                 </div>
@@ -143,7 +143,7 @@ export default class ShowDetail extends React.Component {
 
 
                                 {(this.state.check === true) && <div class="btn">
-                                    <button class="hoan-thanh-xac-nhan" onClick={this.xacnhan(res.order_items[0].id)}>Hoàn thành xác nhận!</button>
+                                    <button class="hoan-thanh-xac-nhan" onClick={this.xacnhan(res.id)}>Hoàn thành xác nhận!</button>
                                     <button class="huy-xac-nhan" onClick={e => this.setState({ check: !this.state.check })}>Hủy xác nhận !</button>
                                 </div>
                                 }
