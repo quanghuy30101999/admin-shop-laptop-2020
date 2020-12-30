@@ -7,7 +7,7 @@ import { findProductAPI } from '../../actions/products/findProduct.action'
 class Header extends Component {
     constructor(props) {
         super(props);
-        this.cart_id = localStorage.getItem('token') != null ? JSON.parse(localStorage.getItem('token')).user.cart.id : '';
+        this.cart_id = localStorage.getItem('token') != null ? JSON.parse(localStorage.getItem('token')).user.cart.id : 0;
     }
     componentDidMount() {
         this.props.getCart(this.cart_id)
