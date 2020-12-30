@@ -33,11 +33,10 @@ export const login = (isLogin) => {
                 password: isLogin.password
             }
           }).then(res=>{
-              console.log(res)
                 localStorage.setItem('token', JSON.stringify(res.data))
                 dispatch(action_login(res.status));
-          }).then(error => {
-              console.log(error);
-        });
+          }).catch(error => {
+            alert('Đăng nhập thất bại');
+          });
     }
 }

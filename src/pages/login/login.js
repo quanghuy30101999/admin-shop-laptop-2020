@@ -18,6 +18,7 @@ class App extends Component {
   };
 
   login(e) {
+    e.preventDefault();
     this.props.login(this.state);
     
     this.setState({ email: "", password: "" });
@@ -45,19 +46,19 @@ class App extends Component {
             <span className="dangnhap">Đăng Nhập</span>
           </div>
           <div className="backgr">
-            <div className="formdn">
+            <form className="formdn" onSubmit={(e) => this.login(e)}>
               <div className="card border-primary ">
                 <div className="card-header text-center">Đăng Nhập</div>
                 <div className="card-body ">
                   <input onChange={(e) => this.isChange(e)} type="email" className="form-control mb-4" name="email" placeholder="Email/Số điện thoại/Tên đăng nhập" required/>
                   <input onChange={(e) => this.isChange(e)} type="password" className="form-control " name="password" placeholder="Mật khẩu" required/>
                 </div>
-                <input type="submit" value="Đăng nhập" className="btn btn-block btn-danger dk mb-2" onClick={(e) => this.login(e)} />
+                <input type="submit" value="Đăng nhập" className="btn btn-block btn-danger dk mb-2"  />
                 <a href="/" className="quenmk">Quên mật khẩu</a>
                 <span className="ffff mb-2">------------- HOẶC --------------</span>
                 <div className="dktk mb-4">Bạn chưa có tài khoản ?<Link to="/register" className="dndn">Đăng Ký</Link></div>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </Fragment>

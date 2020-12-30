@@ -92,7 +92,7 @@ class DataCart extends Component {
                 )
             } else {
                 return (
-                    <h2>Empty</h2>
+                    <h2 style={{color: 'blue',marginLeft : '-250px'}}>Giỏ hàng rỗng</h2>
                 )
             }
         }

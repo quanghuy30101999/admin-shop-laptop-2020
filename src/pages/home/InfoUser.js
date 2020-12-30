@@ -39,7 +39,8 @@ class InforUser extends Component {
             data :{[name] : value}
         })
     }
-    updateUser(id){
+    updateUser(e,id){
+        e.preventDefault();
         axios({
             method: 'PUT',
             url: 'https://shop-laptop-2020.herokuapp.com/v1/users/'+`${id}`,
@@ -54,11 +55,12 @@ class InforUser extends Component {
             this.setState({
                 isRed : true
             })
-          })
-          console.log(id);
+          }).catch(error => {
+            alert('Thay đổi thông tin thất bại');
+          });
     }
-    updatePass(id){
-        console.log(this.state);
+    updatePass(e,id){
+        e.preventDefault();
         axios({
             method: 'PATCH',
             url: 'https://shop-laptop-2020.herokuapp.com/v1/users/'+`${id}` +'/password',
@@ -68,21 +70,10 @@ class InforUser extends Component {
                 'Authorization': JSON.parse(localStorage.getItem('token'))['token']
             }
           }).then( res =>{
-              console.log(res);
-              if(res.status == 200){
-                this.setState({
-                    isRed : true,
-                })
                 alert('Thay đổi mật khẩu thành công')
-              }
-              else{
-                this.setState({
-                    isRed : true,
-                    msgUpdatePass: 'Cập nhật mật khẩu thất bại'
-                })
-              }
-          })
-          console.log(id);
+          }).catch(error => {
+            alert('Thay đổi mật khẩu thất bại');
+          });
     }
     componentWillMount(){
         console.log(JSON.parse(localStorage.getItem('token')).user.id);
@@ -108,8 +99,8 @@ class InforUser extends Component {
         kiemTraHienThi(){
             if(this.state.updatePass === false){
                 return(
-                <form className="backgr">
-                    <div className="formtt">
+                <div className="backgr">
+                    <form className="formtt" onSubmit={(e)=>this.updateUser(e,this.state.user.id)}>
                     <div className="card border-primary ">
                         <div className="card-header text-center">Thông tin tài khoản</div>
                         <div className="card-body carbd">
@@ -119,7 +110,7 @@ class InforUser extends Component {
                         </div>
                         <div classname="btn-group mb-4">
                             <label classname="label_input lbInforUser" htmlfor>Số điện thoại :</label>
-                            <input type="text" onChange={(e)=>this.isChange(e)} classname="form-control nhapvao" name="phone" defaultValue={this.state.user.phone}   required/>
+                            <input type="number" onChange={(e)=>this.isChange(e)} classname="form-control nhapvao" name="phone" defaultValue={this.state.user.phone}   required/>
                         </div>
                         <div classname="btn-group mb-4">
                             <label classname="label_input lbInforUser" htmlfor>Email :</label>
@@ -134,16 +125,16 @@ class InforUser extends Component {
                             <input type="password" classname="form-control nhapvao mkne" defaultValue="xxxxxx" disabled/>
                             <a href="/" className="updatepass" onClick={(e)=>this.setTrangThai(e)}>Thay đổi</a>
                         </div>
-                        <div className="btn btn-danger cn" onClick={()=>this.updateUser(this.state.user.id)}>Cập nhật</div>
+                        <button className="btn btn-danger cn" >Cập nhật</button>
                         </div>
                     </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
                 )
             }
             else return(
                 <div className="backgr">
-                    <form className="formdn">
+                    <form className="formdn" onSubmit={(e)=>this.updatePass(e,this.state.user.id)}>
                     <div className="card border-primary ">
                         <div className="card-header text-center">Thay đổi mật khẩu</div>
                         <div className="card-body ">
@@ -151,7 +142,7 @@ class InforUser extends Component {
                         <input onChange={(e)=>this.set_new_password(e)} type="password" className="form-control mb-4" name="new_password" placeholder="Mật khẩu mới"  required/>
                         <input onChange={(e)=>this.isChange(e)} type="password" className="form-control " name="confim_password" placeholder="Nhập lại mật khẩu mới"  required/>
                         </div>
-                        <div className="btn btn-block btn-danger dn mb-2" onClick={()=>this.updatePass(this.state.user.id)}>Xác nhận</div>
+                        <button className="btn btn-block btn-danger dn mb-2" >Xác nhận</button>
                     </div>
                     </form>
                 </div>
