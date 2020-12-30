@@ -4,6 +4,7 @@ import axios from 'axios'
 import '../home/css/register.css'
 class Register extends Component {
     constructor(props) {
+        this.msg="";
         super(props);
         this.state = {
             isRed: false
@@ -18,7 +19,6 @@ class Register extends Component {
         })
     }
     registerUser(e) {
-        e.preventDefault()
         axios({
             method: 'post',
             url: 'https://shop-laptop-2020.herokuapp.com/v1/users',

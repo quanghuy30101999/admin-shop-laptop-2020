@@ -18,7 +18,6 @@ class App extends Component {
   };
 
   login(e) {
-    e.preventDefault();
     this.props.login(this.state);
     
     this.setState({ email: "", password: "" });
