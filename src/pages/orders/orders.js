@@ -129,8 +129,8 @@ class Orders extends Component {
                                 <input type="text"
                                     className="form-control " value={this.state.address} onChange={this.handleChange} name="address" placeholder="Nhập tên" />
                             </div>
-                            <div className="btn btn-block btn-danger" onClick={this.order}>Mua hàng</div>
-                            <div className="total">
+                            <div className="btn btn-block btn-danger" style={{width : '51%',marginLeft : '33%'}}  onClick={this.order}>Mua hàng</div>
+                            <div className="total" style={{marginLeft : '23px',marginTop : '10px',height: '50px'}}>
                                 <PaypalButton tranSuccess={tranSuccess} total={this.props.orders.subtotal / 23000} />
                             </div>
                         </div>
