@@ -156,57 +156,7 @@ class Static extends Component {
         return (
             <div class="static">
                 <div class="static-user">
-                    <div class='static-user-content'>
-                        <select value={this.state.valueChange} class="cls-2020-2019" onChange={this.changeYEARS()} >
-                            <option value="2020">2020</option>
-                            <option value="2019">2019</option>
-                        </select>
-                        <img class="" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFAY9x4-O-NnKHQ96ylko8mzE1JM46QT_EwA&usqp=CAU"></img>
-                        <p> Hiện có  <span /><span>{this.state.user}</span>Tài khoản đã đăng kí</p>
-                    </div>
                 </div>
-                <h1>Bảng thống kê chi tiết</h1>
-                <div class="view-0">
-
-                    {(this.state.staticOrder != null) &&
-                        <table>
-                            <tr>
-                                <th>Thống kê \ Tháng</th>
-                                <th>Tháng 1</th>
-                                <th>Tháng 2</th>
-                                <th>Tháng 3</th>
-                                <th>Tháng 4</th>
-                                <th>Tháng 5</th>
-                                <th>Tháng 6</th>
-                                <th>Tháng 7</th>
-                                <th>Tháng 8</th>
-                                <th>Tháng 9</th>
-                                <th>Tháng 10</th>
-                                <th>Tháng 11</th>
-                                <th>Tháng 12</th>
-                            </tr>
-                            <tr>
-                                <th>Số đơn hàng</th>
-                                {this.state.staticOrder.map((res, key) => {
-                                    return <td>{res}</td>
-                                })}
-                            </tr>
-                            <tr> <th>Sản phẩm bán ra</th>
-                                {this.state.staticProduct.map((res, key) => {
-                                    return <td>{res}</td>
-                                })}
-                            </tr>
-                            <tr>
-                                <th>Lợi nhuận</th>
-                                {this.state.staticRevenue.map((res, key) => {
-                                    return <td>{res}đ</td>
-                                })}
-                            </tr>
-                        </table>
-                    }
-                </div>
-
-
                 <div class="view-1">
                     <div class="static-order">
                         <h1>Thống kê đơn hàng</h1>
@@ -221,21 +171,58 @@ class Static extends Component {
                         />
                     </div>
                     <div class="static-product">
-                        <h1 class="sllls">Số lượng sản phẩm đã bán </h1>
-                        <Doughnut
-                            data={this.state.dataProduct}
-                            option={{
-                                title: {
-                                    display: true,
-                                    text: ""
-                                }
-                            }}
-                        />
+                        <div class='user-content'>
+                            <img class="" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFAY9x4-O-NnKHQ96ylko8mzE1JM46QT_EwA&usqp=CAU"></img>
+                            <p> Hiện có  <span /><span>{this.state.user}</span>Tài khoản đã đăng kí</p>
+                        </div>
                     </div>
                 </div>
                 <div class="view-2">
                     <h1>Doanh thu</h1>
-
+                    <select value={this.state.valueChange} class="cls-2020-2019" onChange={this.changeYEARS()} >
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2020</option>
+                        <option value="2019">2019</option>
+                    </select>
+                    <div class="view-0">
+                        {(this.state.staticOrder != null) &&
+                            <table>
+                                <tr>
+                                    <th>Thống kê \ Tháng</th>
+                                    <th>Tháng 1</th>
+                                    <th>Tháng 2</th>
+                                    <th>Tháng 3</th>
+                                    <th>Tháng 4</th>
+                                    <th>Tháng 5</th>
+                                    <th>Tháng 6</th>
+                                    <th>Tháng 7</th>
+                                    <th>Tháng 8</th>
+                                    <th>Tháng 9</th>
+                                    <th>Tháng 10</th>
+                                    <th>Tháng 11</th>
+                                    <th>Tháng 12</th>
+                                </tr>
+                                <tr>
+                                    <th>Số đơn hàng</th>
+                                    {this.state.staticOrder.map((res, key) => {
+                                        return <td>{res}</td>
+                                    })}
+                                </tr>
+                                <tr> <th>Sản phẩm bán ra</th>
+                                    {this.state.staticProduct.map((res, key) => {
+                                        return <td>{res}</td>
+                                    })}
+                                </tr>
+                                <tr>
+                                    <th>Lợi nhuận</th>
+                                    {this.state.staticRevenue.map((res, key) => {
+                                        return <td>{res}đ</td>
+                                    })}
+                                </tr>
+                            </table>
+                        }
+                    </div>
                     <div class="revenue">
                         <Line
                             data={this.state.dataRevenue}
