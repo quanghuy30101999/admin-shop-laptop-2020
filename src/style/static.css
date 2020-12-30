@@ -24,7 +24,9 @@
 .static-user-content>p>span{
     color: brown;
 }
-
+.user-content {
+    margin-left: 30px;
+}
 .static-order{
     float: left;
     width: 60%;

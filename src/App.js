@@ -28,7 +28,6 @@ class App extends Component {
       <Fragment>
         <Router>
           <Route exact path="/" component={Home} />
-
           <Route  path="/history_order" component={HistoryOrder} />
           <Route  path="/infor_user" component={InforUser} />
           <Route  path="/user_orders" component={UserOrders} />
