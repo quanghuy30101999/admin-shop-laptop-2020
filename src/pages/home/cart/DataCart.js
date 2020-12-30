@@ -12,7 +12,7 @@ class DataCart extends Component {
 
     constructor(props) {
         super(props);
-        this.cart_id = localStorage.getItem('token') != null ? JSON.parse(localStorage.getItem('token')).user.cart.id : '';
+        this.cart_id = localStorage.getItem('token') != null ? JSON.parse(localStorage.getItem('token')).user.cart.id : 0;
         this.state = {
             order_item_ids: [],
             subtotal: 0,
@@ -68,7 +68,7 @@ class DataCart extends Component {
                         <div className="gia1">{cart.unit_price}</div>
                     </div>
                     <div className="col-sm-3">
-                        <input type="number" name="" id="" onChange={(e) => this.setTien(cart.id, e)} className="soluongsp" min={1} defaultValue={cart.quantity} />
+                        <input style={{ width: '150px' }} className="soluongsp" type="number" onChange={(e) => this.setTien(cart.id, e)} value={cart.quantity} />
                     </div>
                 </div>
             )
@@ -118,23 +118,7 @@ class DataCart extends Component {
                             </div>
                         </div>
                         {thanhtoan()}
-                        {/* {this.props.cart.length > 0}
-
-                        <div className="col-sm-4" id="tinhgia">
-                            <div className="divtrang card card-block">
-                                <div className="thanhtien">
-                                    <div className="phai float-xs-right">
-                                        <div className="trai">Thành tiền</div>
-                                        <div className="todo">{sum}đ</div>
-                                        <div className="gom">(Đã bao gồm VAT nếu có)</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="btn btn-block btn-danger" onClick={(e) => this.order(e, sum)}>Tiến hành đặt hàng</div>
-                        </div>
-                        </div> */}
                     </div>
-
                 </div>
                 <Footer />
             </Fragment>
