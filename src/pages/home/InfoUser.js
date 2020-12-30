@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 class InforUser extends Component {
 
     constructor(props) {
@@ -48,8 +49,8 @@ class InforUser extends Component {
                 'Authorization': JSON.parse(localStorage.getItem('token'))['token']
             }
           }).then( res =>{
-              console.log(res.status);
-              console.log(res);
+            alert('Thay đổi thông tin thành công');
+            localStorage.setItem('token', JSON.stringify(res.data))
             this.setState({
                 isRed : true
             })
@@ -97,7 +98,6 @@ class InforUser extends Component {
             })
             .catch(error => console.log(error));
           }
-            
         }
         setTrangThai(e){
             e.preventDefault();
@@ -108,26 +108,26 @@ class InforUser extends Component {
         kiemTraHienThi(){
             if(this.state.updatePass === false){
                 return(
-                <div className="backgr">
+                <form className="backgr">
                     <div className="formtt">
                     <div className="card border-primary ">
                         <div className="card-header text-center">Thông tin tài khoản</div>
                         <div className="card-body carbd">
                         <div classname="btn-group mb-4">
                             <label classname="label_input lbInforUser" htmlfor>Tên :</label>
-                            <input type="text" onChange={(e)=>this.isChange(e)} classname="form-control nhapvao" name="name" defaultValue={this.state.user.name}  />
+                            <input type="text" onChange={(e)=>this.isChange(e)} classname="form-control nhapvao" name="name" defaultValue={this.state.user.name}  required/>
                         </div>
                         <div classname="btn-group mb-4">
                             <label classname="label_input lbInforUser" htmlfor>Số điện thoại :</label>
-                            <input type="text" onChange={(e)=>this.isChange(e)} classname="form-control nhapvao" name="phone" defaultValue={this.state.user.phone}  />
+                            <input type="text" onChange={(e)=>this.isChange(e)} classname="form-control nhapvao" name="phone" defaultValue={this.state.user.phone}   required/>
                         </div>
                         <div classname="btn-group mb-4">
                             <label classname="label_input lbInforUser" htmlfor>Email :</label>
-                            <input type="text" onChange={(e)=>this.isChange(e)} classname="form-control nhapvao" name="email" defaultValue={this.state.user.email}  />
+                            <input type="email" onChange={(e)=>this.isChange(e)} classname="form-control nhapvao" name="email" defaultValue={this.state.user.email}   required/>
                         </div>
                         <div classname="btn-group mb-4">
                             <label classname="label_input lbInforUser" htmlfor>Địa chỉ :</label>
-                            <input type="textarea" onChange={(e)=>this.isChange(e)} classname="form-control nhapvao" name="address" defaultValue={this.state.user.address}  />
+                            <input type="textarea" onChange={(e)=>this.isChange(e)} classname="form-control nhapvao" name="address" defaultValue={this.state.user.address}   required />
                         </div>
                         <div classname="btn-group mb-4">
                             <label classname="label_input lbInforUser" htmlfor>Password :</label>
@@ -138,26 +138,27 @@ class InforUser extends Component {
                         </div>
                     </div>
                     </div>
-                </div>
+                </form>
                 )
             }
             else return(
                 <div className="backgr">
-                    <div className="formdn">
+                    <form className="formdn">
                     <div className="card border-primary ">
                         <div className="card-header text-center">Thay đổi mật khẩu</div>
                         <div className="card-body ">
-                        <input onChange={(e)=>this.set_old_password(e)} type="password" className="form-control mb-4" name="old_password" placeholder="Mật khẩu cũ" />
-                        <input onChange={(e)=>this.set_new_password(e)} type="password" className="form-control mb-4" name="new_password" placeholder="Mật khẩu mới" />
-                        <input onChange={(e)=>this.isChange(e)} type="password" className="form-control " name="confim_password" placeholder="Nhập lại mật khẩu mới" />
+                        <input onChange={(e)=>this.set_old_password(e)} type="password" className="form-control mb-4" name="old_password" placeholder="Mật khẩu cũ"  required/>
+                        <input onChange={(e)=>this.set_new_password(e)} type="password" className="form-control mb-4" name="new_password" placeholder="Mật khẩu mới"  required/>
+                        <input onChange={(e)=>this.isChange(e)} type="password" className="form-control " name="confim_password" placeholder="Nhập lại mật khẩu mới"  required/>
                         </div>
                         <div className="btn btn-block btn-danger dn mb-2" onClick={()=>this.updatePass(this.state.user.id)}>Xác nhận</div>
                     </div>
-                    </div>
+                    </form>
                 </div>
             )
         }
     render() {
+        
         return (
             <div className="wrapper">
                 <div className="upup">

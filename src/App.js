@@ -18,6 +18,7 @@ import Account from './components/Admin/account'
 import Category from './components/Admin/category'
 import HomeAdmin from './components/Admin/homeAdmin'
 import Static from './components/Admin/static'
+import HistoryOrder from './pages/home/HistoryOrder';
 import { connect } from 'react-redux';
 import History from './pages/home/History/history'
 class App extends Component {
@@ -26,8 +27,9 @@ class App extends Component {
       <Fragment>
         <Router>
           <Route exact path="/" component={Home} />
-          <Route exact path="/infor" component={InfoUser} />
-          <Route exact path="/user_orders" component={UserOrders} />
+          <Route  path="/infor" component={InfoUser} />
+          <Route  path="/history_order" component={HistoryOrder} />
+          <Route  path="/user_orders" component={UserOrders} />
           <Route path="/shoppingCart">
             <DataCart />
           </Route>

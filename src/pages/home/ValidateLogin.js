@@ -54,8 +54,8 @@ class ValidateLogin extends Component {
         if(this.state.hienThiUser === true){
             return (
                 <ul className="inforUser">
-                    <li onClick={(e) =>this.hienThiThongTinUser(e)}><Link to="/infor">Thông tin tài khoản</Link></li>
-                    <li onClick={(e) =>this.hienThiThongTinUser(e)}><Link to="/infor">Đơn hàng của tôi</Link></li>
+                    <li onClick={(e) =>this.hienThiThongTinUser(e)}><Link to="/infor_user">Thông tin tài khoản</Link></li>
+                    <li onClick={(e) =>this.hienThiThongTinUser(e)}><Link to="/history_order">Đơn hàng của tôi</Link></li>
                     <li onClick={(e) =>this.logOut(e)}>Đăng xuất</li>
                 </ul>
             )

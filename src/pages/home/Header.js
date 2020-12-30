@@ -33,7 +33,7 @@ class Header extends Component {
                         <i className="fa fa-shopping-cart"> Giỏ hàng</i>
                         <span className="soluong">{localStorage.getItem('token') != null ? this.props.cart.length : 0}</span>
                     </Link>
-                    <Link to="/history">
+                    <Link to="/history_order">
                         <span class="history">History</span>
                     </Link>
                 </div>

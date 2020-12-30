@@ -17,7 +17,8 @@ class Register extends Component {
             [name]: value
         })
     }
-    registerUser() {
+    registerUser(e) {
+        e.preventDefault()
         axios({
             method: 'post',
             url: 'https://shop-laptop-2020.herokuapp.com/v1/users',
@@ -53,7 +54,7 @@ class Register extends Component {
                                 <input type="text" onChange={(e) => this.isChange(e)} className="form-control mb-2" name="address" placeholder="Nhập địa chỉ" required />
                                 <input type="password" onChange={(e) => this.isChange(e)} className="form-control " name="password" placeholder="Mật khẩu" required />
                             </div>
-                            <div className="btn btn-block btn-danger dk mb-2" onClick={(e) => this.registerUser(e)}>Đăng Ký</div>
+                            <input type="submit" value="Đăng ký" className="btn btn-block btn-danger dk mb-2" onClick={(e) => this.registerUser(e)} />
                             <span className="ffff mb-2">------------- HOẶC --------------</span>
                             <div className="dktk mb-4">Bạn đã có tài khoản ?<Link to="/login" className="dndn">Đăng Nhập</Link></div>
                         </div>

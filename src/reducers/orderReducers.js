@@ -38,6 +38,9 @@ const orders = (state = initialState, action) => {
             const newState = { ...state }
             newState = action.payload
             return { ...newState }
+        case 'GET_HISTORY_ORDER':
+            state=action.payload.data
+            return [...state]
         default: return [...state];
     }
 }
