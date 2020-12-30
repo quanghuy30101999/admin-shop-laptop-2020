@@ -14,7 +14,8 @@ class Orders extends Component {
             user_name: props.orders.user.name,
             phone: props.orders.user.phone,
             address: props.orders.user.address,
-            order_success: false
+            order_success: false,
+            phuongthuc: ''
         }
     }
 
@@ -37,9 +38,16 @@ class Orders extends Component {
         // })
 
         if (this.state.order_success) {
-            window.setTimeout(() => {
-                window.location.href = '/shoppingCart'
-            }, 2000);
+            if (this.state.phuongthuc === 'online') {
+                window.setTimeout(() => {
+                    window.location.href = '/history_order'
+                }, 3000);
+            }
+            else {
+                window.setTimeout(() => {
+                    window.location.href = '/history_order'
+                }, 1000);
+            }
         }
         let order = this.props.orders.order_item_ids.map((cart, index) => {
             return (
@@ -78,7 +86,8 @@ class Orders extends Component {
             })
             this.props.createOrderAPI(result, subtotal, user_id, user)
             this.setState({
-                order_success: true
+                order_success: true,
+                phuongthuc: 'online'
             })
             alert("You have successfully placed an order.")
         }
@@ -151,7 +160,8 @@ class Orders extends Component {
         })
         this.props.createOrderAPI(result, subtotal, user_id, user)
         this.setState({
-            order_success: true
+            order_success: true,
+            phuongthuc: 'tien'
         })
     }
 }

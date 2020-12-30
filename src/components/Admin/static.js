@@ -69,6 +69,7 @@ class Static extends Component {
         var tmp = [];
         var listProduct = [];
         var listRevenue = [];
+        var listorder = [];
         callAPI.callPARAM('count_revenue', 'GET', x, localStorage.getItem('token'), year).then(res => {
             console.log("static", res.data)
             const x = Object.values(res.data);
@@ -79,7 +80,13 @@ class Static extends Component {
             for (var iteam of tmp) {
                 listProduct.push(iteam.product_quantity)
                 listRevenue.push(iteam.revenue)
+                listorder.push(iteam.order_quantity)
             }
+            this.setState({
+                staticOrder: listorder,
+                staticProduct: listProduct,
+                staticRevenue: listRevenue
+            })
             console.log(listRevenue)
         }).then(() => {
             this.setState({
@@ -158,6 +165,47 @@ class Static extends Component {
                         <p> Hiện có  <span /><span>{this.state.user}</span>Tài khoản đã đăng kí</p>
                     </div>
                 </div>
+                <h1>Bảng thống kê chi tiết</h1>
+                <div class="view-0">
+
+                    {(this.state.staticOrder != null) &&
+                        <table>
+                            <tr>
+                                <th>Thống kê \ Tháng</th>
+                                <th>Tháng 1</th>
+                                <th>Tháng 2</th>
+                                <th>Tháng 3</th>
+                                <th>Tháng 4</th>
+                                <th>Tháng 5</th>
+                                <th>Tháng 6</th>
+                                <th>Tháng 7</th>
+                                <th>Tháng 8</th>
+                                <th>Tháng 9</th>
+                                <th>Tháng 10</th>
+                                <th>Tháng 11</th>
+                                <th>Tháng 12</th>
+                            </tr>
+                            <tr>
+                                <th>Số đơn hàng</th>
+                                {this.state.staticOrder.map((res, key) => {
+                                    return <td>{res}</td>
+                                })}
+                            </tr>
+                            <tr> <th>Sản phẩm bán ra</th>
+                                {this.state.staticProduct.map((res, key) => {
+                                    return <td>{res}</td>
+                                })}
+                            </tr>
+                            <tr>
+                                <th>Lợi nhuận</th>
+                                {this.state.staticRevenue.map((res, key) => {
+                                    return <td>{res}đ</td>
+                                })}
+                            </tr>
+                        </table>
+                    }
+                </div>
+
 
                 <div class="view-1">
                     <div class="static-order">
